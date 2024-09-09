@@ -1,0 +1,49 @@
+<nav class="googlefont border-b border-2 fixed right-0 top-0 left-0 z-50 bg-white">
+    <ul class="flex justify-around items-center">
+        <li class="cursor-pointer text-orange-600 font-bold text-2xl" [routerLink]="['/']"> eventStream </li>
+        <li>
+            <input type="search" name="search" id="search"
+                class="w-[40rem] h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full"
+                placeholder="Search events">
+        </li>
+
+        <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2"
+            [routerLink]="['/createEvents']">
+            <div>
+                <img src="https://t3.ftcdn.net/jpg/07/23/62/12/240_F_723621285_P7ze76qTA2R19MhKBAt1QeeJrcWdT1tV.jpg"
+                    alt="add" class="w-5 h-5 mx-auto">
+                <p> Create an event </p>
+            </div>
+        </li>
+
+        <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2"
+            [routerLink]="['/']">
+            <div>
+                <img src="https://cdn-icons-png.freepik.com/256/11488/11488565.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                    alt="add" class="w-5 h-5 mx-auto">
+                <p> Likes </p>
+            </div>
+        </li>
+
+        <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2"
+            [routerLink]="['/tickets']">
+            <div>
+                <img src="https://t3.ftcdn.net/jpg/01/09/45/80/240_F_109458037_1Z1WHVQTOxarR5qTBDgaqB8aXwryF7h7.jpg"
+                    alt="add" class="w-5 h-5 mx-auto">
+                <p> Tickets </p>
+            </div>
+        </li>
+
+        <li>
+            <div [routerLink]="['/accountInfo']"
+                class="flex justify-center items-center gap-4 cursor-pointer hover:bg-gray-100 px-5 py-1">
+                <div class="rounded-full bg-gray-100 px-4 py-4">
+                    <img src="https://cdn-icons-png.freepik.com/256/15049/15049767.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="profile" class="w-4 h-4">
+                </div>
+                <p class="font-bold text-gray-500 text-sm"> {{email | lowercase}} </p>
+            </div>
+        </li>
+
+    </ul>
+</nav>

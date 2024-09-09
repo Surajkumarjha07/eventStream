@@ -1,0 +1,179 @@
+<section class="googlefont">
+    <img src="https://cdn.evbstatic.com/s3-build/perm_001/6e32ef/django/images/create/auto-creation/auto-create_layout-top.png"
+        alt="bgImg" class="fixed top-0 left-52 -z-10">
+
+    <div class="w-full">
+        <p class="text-orange-700 font-bold text-2xl cursor-pointer fixed top-4 left-8" [routerLink]="['/']">
+            eventStream </p>
+    </div>
+
+    <div class="w-1/3 mx-auto mt-20 text-start">
+        <h1 class="text-4xl font-bold text-gray-800"> Create an event with us </h1>
+
+        <form class="my-8 text-gray-800" [formGroup]="createEvent" (submit)="create()">
+
+            <!-- Event Title -->
+            <div>
+                <h3 class="text-lg font-medium "> What&apos;s the name of your event? </h3>
+                <p class="text-xs font-medium my-3"> This will be your event’s title. Your title will be used to
+                    help
+                    create
+                    your event’s summary,
+                    description, category, and tags - so be specific! </p>
+
+                <input type="text" name="title"
+                    class="border-2 border-gray-400 w-full focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg placeholder:text-sm placeholder:text-gray-700"
+                    placeholder="Event Title" formControlName="title">
+            </div>
+
+            <!-- Event Category -->
+            <div>
+
+                <h3 class="text-lg font-medium mt-12"> Choose category of your event? </h3>
+                <p class="text-xs font-medium my-3"> This will be your event’s category. Your event category will be
+                    used to help
+                    users to search for your events! </p>
+
+                <div
+                    class="border-2 border-gray-400 w-full focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg placeholder:text-sm placeholder:text-gray-700">
+                    <select name="category" formControlName="category" class="w-full outline-none">
+                        <option value="music events"> Music Events </option>
+                        <option value="corporate events"> Corporate Events </option>
+                        <option value="Online events"> Online Events </option>
+                        <option value="food-beverages events"> Food and beverages events </option>
+                        <option value="performing-arts events"> Performing arts events </option>
+                        <option value="classes-workshops events"> Classes and workshops events </option>
+                        <option value="retail events"> Retail Events </option>
+                        <option value="non-profit events"> Non-Profit Events </option>
+                        <option value="festivals-fairs events"> Festivals & Fairs Events </option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Event date and time -->
+            <div>
+                <h3 class="text-lg font-medium mt-12 mb-5"> When does your event start and end? </h3>
+
+                <div class="flex justify-center items-center gap-5">
+                    <input type="date" name="date"
+                        class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 w-64 py-3 rounded-lg"
+                        formControlName="date">
+
+                    <input type="time" name="startTime"
+                        class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg"
+                        formControlName="start_time">
+
+                    <input type="time" name="endTime"
+                        class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg"
+                        formControlName="end_time">
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="h-auto">
+                <h2 class="text-lg font-medium mt-12 mb-5"> Where is it located?</h2>
+
+                <div class="flex justify-start items-center gap-5">
+                    <div class="flex justify-center items-center gap-2 px-3 py-3 bg-gray-200 w-fit h-auto rounded-full cursor-pointer"
+                        (click)="getLocType($event)">
+                        <img src="https://cdn-icons-png.freepik.com/256/402/402326.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                            alt="location" class="w-5 h-5 pointer-events-none">
+                        <p class="text-xs font-medium"> Venue </p>
+                    </div>
+
+                    <div class="flex justify-center items-center gap-2 px-3 py-3 bg-gray-200 w-fit h-auto rounded-full cursor-pointer"
+                        (click)="getLocType($event)">
+                        <img src="https://cdn-icons-png.freepik.com/256/5762/5762756.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                            alt="location" class="w-5 h-5 pointer-events-none">
+                        <p class="text-xs font-medium"> Online event </p>
+                    </div>
+
+                    <div class="flex justify-center items-center gap-2 px-3 py-3 bg-gray-200 w-fit h-auto rounded-full cursor-pointer"
+                        (click)="getLocType($event)">
+                        <img src="https://cdn-icons-png.freepik.com/256/7806/7806633.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                            alt="location" class="w-5 h-5">
+                        <p class="text-xs font-medium"> To be announced </p>
+                    </div>
+                </div>
+
+                <div
+                    class="flex justify-start items-center gap-4 border-2 border-gray-400 w-full my-6 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg">
+                    <img src="https://cdn-icons-png.freepik.com/256/402/402326.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="location" class="w-5 h-5">
+                    <input type="text" name="location" class="w-full placeholder:text-gray-700 outline-none"
+                        placeholder="location" formControlName="location">
+                </div>
+
+                <div class="flex justify-start items-center gap-3 cursor-pointer w-fit px-4 py-2 rounded-full hover:bg-gray-100"
+                    (click)="showLocDetails()" *ngIf="!LocDetails; else locationBlock">
+                    <img src="https://cdn-icons-png.freepik.com/256/3935/3935029.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="location" class="w-4 h-4">
+                    <p class="text-sm font-semibold text-gray-600"> Add location details </p>
+                </div>
+
+                <ng-template #locationBlock>
+                    <div>
+                        <div class="flex justify-start items-center gap-4 my-6">
+                            <input type="text" name="building"
+                                class="border-2 border-gray-400 w-full focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg placeholder:text-sm placeholder:text-gray-700"
+                                placeholder="Apartment, suite, etc" formControlName="building">
+
+                            <input type="text" name="region"
+                                class="border-2 border-gray-400 w-full focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg placeholder:text-sm placeholder:text-gray-700"
+                                placeholder="Region" formControlName="region">
+                        </div>
+
+                        <input type="text" name="venue"
+                            class="border-2 border-gray-400 w-full focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg placeholder:text-sm placeholder:text-gray-700"
+                            placeholder="Venue name" formControlName="venue">
+                    </div>
+                </ng-template>
+
+            </div>
+
+            <!-- Ticket Price -->
+            <div>
+                <h2 class="text-lg font-medium mt-8"> How much do you want to charge for tickets? </h2>
+                <p class="text-xs font-medium my-1"> Our tool can only generate one General Admission ticket for
+                    now.
+                    You can edit and add more ticket types later. </p>
+
+                <div
+                    [ngClass]="!isDisabled ? 'flex justify-center items-center gap-4 border-2 border-gray-400 w-44 my-6 focus:border-gray-800 hover:border-gray-800 px-2 py-3 rounded-lg' : 'flex justify-center items-center gap-4 border-2 border-gray-300 w-44 my-6 px-2 py-3 rounded-lg'">
+                    <p class="text-xl font-bold"> $ </p>
+                    <input type="number" name="price"
+                        [ngClass]="!isDisabled ? 'w-24 outline-none placeholder:text-gray-700' : 'w-24 outline-none placeholder:text-gray-400'"
+                        placeholder="0.00" formControlName="price">
+                </div>
+
+                <div class="flex justify-start items-center gap-3">
+                    <input type="checkbox" name="free" (click)="disable()">
+                    <p class="text-xs font-medium text-gray-700"> My tickets are free </p>
+                </div>
+            </div>
+
+            <!-- Event Capacity -->
+            <div>
+                <h2 class="text-lg font-medium mt-8"> What's the capacity for your event? </h2>
+                <p class="text-xs font-medium my-1"> Event capacity is the total number of tickets you're willing to
+                    sell. </p>
+
+                <input type="number" name="capacity"
+                    class="flex justify-center items-center gap-4 border-2 border-gray-400 w-44 my-6 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg outline-none placeholder:text-gray-700"
+                    placeholder="0" formControlName="capacity">
+            </div>
+
+            <!-- <a [routerLink]="['/payment']"> -->
+            <input type="submit" value="Create Event"
+                class="bg-orange-600 w-44 rounded-lg cursor-pointer text-white py-2 my-10" (click)="doPayment()">
+            <!-- </a> -->
+        </form>
+    </div>
+
+    <img src="https://cdn.evbstatic.com/s3-build/perm_001/6e32ef/django/images/create/auto-creation/auto-create_layout-top.png"
+        alt="bgImg" class="fixed bottom-0 right-0 rotate-180">
+
+</section>
+
+<app-payment-page [goForPayment]="goForPayment" [price]="createEvent.controls.price.value" [event_creator]="createEvent.controls.event_creator.value" [paymentResponse]="paymentResponse"></app-payment-page>

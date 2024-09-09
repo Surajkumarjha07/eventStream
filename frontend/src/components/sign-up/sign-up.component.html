@@ -1,0 +1,32 @@
+<section class="flex justify-center items-center overflow-y-hidden -mt-16">
+
+    <aside class="w-1/2 h-screen bg-white flex justify-center">
+        <div class="h-screen ">
+            <p class="googlefont text-orange-600 font-bold text-2xl cursor-pointer" [routerLink]="['/']"> eventStream </p>
+            
+            <h1 class="googlefont text-6xl font-extrabold w-72 my-10"> Create an account </h1>
+            <form class="w-96" method="post" [formGroup]="signUp_Form" (submit)="signUp()">
+                
+                <input type="email" name="email" class="w-full py-3 outline-none border-b focus:border-b-2 focus:border-b-orange-600 focus:placeholder:transition-all focus:placeholder:duration-500 focus:placeholder:ease-in-out focus-within:placeholder:text-xs focus:placeholder:text-orange-600 focus:placeholder:-translate-y-5" placeholder="Email address" formControlName="email">
+                <br><br>
+
+                <input type="text" name="name" class="w-full py-3 outline-none border-b focus:border-b-2 focus:border-b-orange-600 focus:placeholder:transition-all focus:placeholder:duration-500 focus:placeholder:ease-in-out focus-within:placeholder:text-xs focus:placeholder:text-orange-600 focus:placeholder:-translate-y-5" placeholder="Name" formControlName="name">
+                <br><br>
+
+                <input type="password" name="password" class="w-full py-3 outline-none border-b focus:border-b-2 focus:border-b-orange-600 focus:placeholder:transition-all focus:placeholder:duration-500 focus:placeholder:ease-in-out focus-within:placeholder:text-xs focus:placeholder:text-orange-600 focus:placeholder:-translate-y-5" placeholder="Password" formControlName="password">
+
+                <input type="submit" value="Sign Up" class="bg-orange-600 w-full cursor-pointer text-white py-2 rounded-sm my-10">
+
+                <p class="text-gray-800 font-semibold my-4">
+                    have an account? <span class="text-blue-600 cursor-pointer" [routerLink]="['/login']"> Log In </span>
+                </p>
+                
+            </form>
+        </div>
+    </aside>
+
+    <aside class="w-1/2 h-screen bg-red-200">
+        <img src="https://www.flashphotography.com/assets/img/specEvent2.jpg" alt="SignUp Image" class="h-full w-full">
+    </aside>
+
+</section>

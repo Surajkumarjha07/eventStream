@@ -1,0 +1,13 @@
+<!-- <a [routerLink]="['/eventInfo']"> -->
+    <section class="googlefont cursor-pointer w-72 bg-white rounded-lg overflow-hidden hover:shadow-lg hover:shadow-gray-300 my-7" (click)="viewCard()">
+        <img [src]="img ? img : 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F678047679%2F1681621140333%2F1%2Foriginal.20240119-052142?w=512&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=9f9a635383f29e439c63e42d2ade0d96'" alt="event">
+        
+        <div class="px-4 py-4">
+            <h1 class="text-gray-700 font-bold text-lg"> {{description}} </h1>
+            <p class="text-gray-700 text-sm font-semibold my-1"> {{date}} • {{start_time}} </p>
+            <p class="text-gray-500 text-sm font-medium my-2"> {{location}} </p>
+            <p class="text-gray-600 text-sm font-semibold"> $ {{price}} </p>
+        </div>
+        
+    </section>
+<!-- </a> -->

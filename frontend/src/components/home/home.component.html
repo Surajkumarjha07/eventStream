@@ -1,0 +1,32 @@
+<section class="googlefont bg-gray-50 w-full overflow-x-hidden">
+    <div class="relative w-full h-fit overflow-hidden">
+        <img src="https://cdn.evbstatic.com/s3-build/fe/build/images/5fe808e647422b815b98b73c28ecf405-3_tablet_1067x470.webp"
+            alt="Image" class="w-full block">
+
+        <div class="absolute w-fit inset-0 px-24 py-16 flex flex-col justify-end">
+            <a [routerLink]="['/findEvents']">
+                <button class="text-white text-sm text-center font-semibold bg-orange-700 px-3 py-3">
+                    Find your next event
+                </button>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="w-5/6 mx-auto mt-16">
+        <h1 class="text-2xl text-gray-800 font-bold my-10"> Top trending in Delhi </h1>
+
+        <div class="flex flex-wrap justify-start gap-8">
+
+            @for (event of fetchedEvents; track $index) {
+                @if (event.id <= 8) {
+                    <app-event-card [description]="event.title" [date]="event.date" [start_time]="event.start_time" [location]="event.location"
+                    [price]="event.price"></app-event-card>
+                }
+            }
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,76 @@
+<!-- Main section -->
+
+<section class="bg-gray-50">
+
+    <!-- Upper Section -->
+    <section class="bg-white w-full border-b-2">
+        <!-- Main Upper section -->
+        <section class="w-5/6 mx-auto bg-white">
+            <div class="py-10 mx-auto  h-[28rem]">
+                <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F678047679%2F1681621140333%2F1%2Foriginal.20240119-052142?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=7ebe82ad7bf088d84f0a01f948592f49"
+                    alt="EventImg" class="mx-auto rounded-xl w-full h-full">
+            </div>
+
+            <div class="flex justify-between items-center  h-auto mx-auto">
+                <div>
+                    <h2 class="googlefont text-blue-950 font-semibold text-xl"> Friday, August 30 </h2>
+                    <h1 class="googlefont text-indigo-950 font-extrabold text-5xl w-[40rem] my-4"> {{description}} -
+                        {{location}} </h1>
+                    <p class="googlefont text-blue-950 font-medium my-8"> Join us in {{location}} on {{date}}, at the
+                        {{building? building : 'JW Marriott Hotel'}} </p>
+                </div>
+
+                <div class="w-80 h-max rounded-xl px-4 py-4 bg-white border text-center">
+                    <p class="googlefont font-medium text-xl"> From CA$ 0 </p>
+                    <a [routerLink]="['/getTicket']">
+                        <button class="googlefont bg-orange-600 w-full py-2 mt-6 text-white rounded-md"> Get Tickets
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class=" h-auto mx-auto my-4">
+                <h3 class="googlefont text-blue-950 font-bold text-2xl"> Date and time </h3>
+                <div class="flex justify-start items-center gap-4 my-2">
+                    <img src="https://cdn-icons-png.freepik.com/256/15999/15999772.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="Calendar" class="w-5 h-5">
+                    <p class="googlefont font-medium text-blue-950"> {{date}} · {{start_time}} IST </p>
+                </div>
+            </div>
+
+            <div class=" h-auto mx-auto my-10">
+                <h3 class="googlefont text-blue-950 font-bold text-2xl"> Location </h3>
+                <div class="flex justify-start items-start gap-4 my-2">
+                    <img src="https://cdn-icons-png.freepik.com/256/11376/11376553.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="Calendar" class="w-4 h-5">
+
+                    <div class="">
+                        <p class="googlefont font-medium text-blue-950"> {{building? building : 'JW Marriott Hotel'}}
+                            {{location}} </p>
+                        <p class="googlefont text-xs my-2 text-blue-950"> {{region? region : 'Asset Area 4'}} - {{venue?
+                            venue :
+                            'Hospitality District Delhi'}} New Delhi,
+                            DL 110037</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Lower Section -->
+
+    <section class="w-full mb-16">
+        <!-- Main Lower section -->
+        <section class="w-5/6 mx-auto">
+            <h1 class="text-blue-950 text-2xl font-bold my-10"> Other events you may like </h1>
+            <div class="flex flex-wrap justify-start gap-8">
+                @for (event of fetchedEvents; track $index) {
+                @if (event.id <= 8) { <app-event-card [description]="event.title" [date]="event.date"
+                    [start_time]="event.start_time" [location]="event.location" [price]="event.price"></app-event-card>
+                    }
+                    }
+            </div>
+        </section>
+    </section>
+
+</section>
