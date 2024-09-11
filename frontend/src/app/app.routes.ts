@@ -9,6 +9,7 @@ import { EventFormComponent } from '../components/event-form/event-form.componen
 import { TicketsComponent } from '../components/tickets/tickets.component';
 import { FindEventsComponent } from '../components/find-events/find-events.component';
 import { PaymentPageComponent } from '../components/payment-page/payment-page.component';
+import { SpecificEventComponent } from '../components/specific-event/specific-event.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path: 'tickets', component: TicketsComponent},
     {path: 'findEvents', component: FindEventsComponent},
     {path: 'payment', component: PaymentPageComponent},
+    {path: 'specificEvent', component: SpecificEventComponent},
     {path: '', component: HomeComponent},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

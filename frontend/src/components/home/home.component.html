@@ -19,8 +19,8 @@
         <div class="flex flex-wrap justify-start gap-8">
 
             @for (event of fetchedEvents; track $index) {
-                @if (event.id <= 8) {
-                    <app-event-card [description]="event.title" [date]="event.date" [start_time]="event.start_time" [location]="event.location"
+                @if (event.location === 'Delhi') {
+                    <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date? event.date : 'To be announced'" [start_time]="event.start_time? event.start_time : '(time not confirmed yet)'" [location]="event.location"
                     [price]="event.price"></app-event-card>
                 }
             }

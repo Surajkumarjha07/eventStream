@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PaymentsService } from '../../services/payments/payments.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 declare var Razorpay: any
 
 @Component({
@@ -11,7 +13,25 @@ declare var Razorpay: any
   standalone: true,
   imports: [RouterModule, CommonModule, EventFormComponent, ReactiveFormsModule],
   templateUrl: './payment-page.component.html',
-  styleUrl: './payment-page.component.css'
+  styleUrl: './payment-page.component.css',
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        opacity: 1,
+        // zIndex: '4',
+        transform: 'translateX(0%)'
+      })),
+
+      state('close', style({
+        opacity: 0,
+        zIndex: -1,
+        transform: 'translateX(-100%)'
+      })),
+
+      transition('close => open', animate('0.5s ease-out')),
+      transition('open => close', animate('0.5s ease-in')),
+    ])
+  ]
 })
 export class PaymentPageComponent implements OnInit {
 
@@ -19,7 +39,7 @@ export class PaymentPageComponent implements OnInit {
 
   captchaCode: number = 0
   captchaMatched: boolean = false
-  @Input() goForPayment: boolean = false
+  @Input() goForPayment!: boolean
   @Input() price: number | null = 0
   @Input() event_creator: string | null = ''
   @Input() paymentResponse: any | null = {}
@@ -46,8 +66,8 @@ export class PaymentPageComponent implements OnInit {
     }
   }
 
-  doPayment() {
-    this.goForPayment = false
+  cancelPayment() {
+    this.goForPayment = !this.goForPayment
   }
 
   makePayment = async () => {
@@ -58,13 +78,13 @@ export class PaymentPageComponent implements OnInit {
       "currency": "USD",
       "name": "eventStream Pvt. Ltd.",
       "description": "Event Booking Transaction",
-      "image": "https://example.com/your_logo",
+      "image": "https://whattheai.tech/wp-content/uploads/2023/08/Logo_NixerAI.png",
       "order_id": `${this.paymentResponse?.id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1 - "order_IluGWxBm9U8zJ8"
       "handler": function (response: any) {
         alert('Payment Successfull!')
       },
       "theme": {
-        "color": "#3399cc"
+        "color": "#FF5500"
       }
     };
 

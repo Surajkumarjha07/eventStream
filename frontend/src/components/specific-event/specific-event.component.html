@@ -1,0 +1,10 @@
+<section class="googlefont">
+    <div class="w-5/6 mx-auto mt-28">
+        <h1 class="text-gray-500 text-4xl font-extrabold"> {{category?.replace('and', '&')}} </h1>
+    </div>
+    <div class="w-5/6 mx-auto flex justify-start gap-8 my-14">
+        @for (event of fetchedEvents; track $index) {
+            <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time" [location]="event.location" [price]="event.price"></app-event-card>
+        }
+    </div>
+</section>

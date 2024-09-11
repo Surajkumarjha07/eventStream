@@ -59,7 +59,8 @@
 
     <section class="text-center text-white my-10 py-10 mx-auto bg-indigo-950">
         <h1 class="text-5xl font-bold"> Reach the right people </h1>
-        <p class="text-xl font-semibold my-4"> Grow your community on a marketplace where millions of people look for things to do. </p>
+        <p class="text-xl font-semibold my-4"> Grow your community on a marketplace where millions of people look for
+            things to do. </p>
 
         <div class="flex justify-center items-center w-full">
             <div class="w-1/2">
@@ -67,21 +68,24 @@
                     <img src="https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/icons/svg/organizer-icon__purple--attendee.svg"
                         alt="ticket" class="">
                     <h2 class="font-bold text-xl my-4"> Attendee Discovery </h2>
-                    <p class="text-sm"> Personalized recommendations are tailored to attendees' interests and location, matching them with events they’d be most interested in attending </p>
+                    <p class="text-sm"> Personalized recommendations are tailored to attendees' interests and location,
+                        matching them with events they’d be most interested in attending </p>
                 </div>
 
                 <div class="w-72 text-start my-6 mx-auto">
                     <img src="https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/icons/svg/organizer-icon__purple--eventbrite-ads.svg"
                         alt="report" class="">
                     <h2 class="font-bold text-xl my-4"> EventStream Ads </h2>
-                    <p class="text-sm"> Promote your event across Eventbrite and get 14x more visibility on our homepage, related events, search results, and more </p>
+                    <p class="text-sm"> Promote your event across Eventbrite and get 14x more visibility on our
+                        homepage, related events, search results, and more </p>
                 </div>
 
                 <div class="w-72 text-start my-6 mx-auto">
                     <img src="https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/icons/svg/organizer-icon__purple--marketing-tools.svg"
                         alt="organizer" class="">
                     <h2 class="font-bold text-xl my-4"> Marketing Tools </h2>
-                    <p class="text-sm"> Engage attendees and reach new ones with our suite of automated email and social marketing tools </p>
+                    <p class="text-sm"> Engage attendees and reach new ones with our suite of automated email and social
+                        marketing tools </p>
                 </div>
             </div>
 
@@ -95,7 +99,8 @@
 
     <section class="text-center text-indigo-950 my-10 py-10 mx-auto bg-white">
         <h1 class="text-5xl font-bold"> Get paid, earn more </h1>
-        <p class="text-xl font-semibold my-4"> Do what you love and earn more money with low-cost fees and quicker payouts </p>
+        <p class="text-xl font-semibold my-4"> Do what you love and earn more money with low-cost fees and quicker
+            payouts </p>
 
         <div class="flex justify-center items-center w-full">
             <div class="w-1/2">
@@ -110,14 +115,16 @@
                     <img src="https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/icons/svg/organizer-icon__purple--payment-marketplace.svg"
                         alt="report">
                     <h2 class="font-bold text-xl my-4"> Payment Processing </h2>
-                    <p class="text-sm"> Easily collect and simplify event payments with built-in, full-service payment processing </p>
+                    <p class="text-sm"> Easily collect and simplify event payments with built-in, full-service payment
+                        processing </p>
                 </div>
 
                 <div class="w-72 text-start my-6 mx-auto">
                     <img src="https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/icons/svg/organizer-icon__purple--scheduled-payouts.svg"
                         alt="organizer" class="">
                     <h2 class="font-bold text-xl my-4"> Scheduled Payouts </h2>
-                    <p class="text-sm"> Get paid before your event takes place on a customized schedule of your choice </p>
+                    <p class="text-sm"> Get paid before your event takes place on a customized schedule of your choice
+                    </p>
                 </div>
             </div>
 
@@ -133,18 +140,19 @@
 
         <div class="px-40 my-10">
             <p class="text-gray-700 font-semibold text-sm"> EXPLORE OUR SOLUTIONS </p>
-            <h1 class="text-gray-800 text-3xl font-bold my-3"> Discover solutions for events of all kinds and sizes </h1>
+            <h1 class="text-gray-800 text-3xl font-bold my-3"> Discover solutions for events of all kinds and sizes
+            </h1>
         </div>
 
         <div class="flex flex-wrap justify-center items-center gap-5">
 
-            @for (event of Events; track $index) {                
-                <div class="w-96 bg-gray-100 flex justify-start items-center gap-5 rounded-lg overflow-hidden cursor-pointer hover:bg-white hover:shadow-lg hover:shadow-gray-300">
+            @for (event of Events; track $index) {
+                <div class="w-96 bg-gray-100 flex justify-start items-center gap-5 rounded-lg overflow-hidden cursor-pointer hover:bg-white hover:shadow-lg hover:shadow-gray-300" (click)="navFun($event)">
                     <img [src]="event.img" alt="templates" class="w-36 h-36">
                     <p class="font-semibold text-2xl text-gray-800"> {{event.text}} </p>
                 </div>
             }
-            
+
         </div>
 
     </section>

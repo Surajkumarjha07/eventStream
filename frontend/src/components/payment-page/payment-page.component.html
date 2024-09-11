@@ -1,5 +1,5 @@
 <section
-    [ngClass]="goForPayment? 'googlefont flex bg-white shadow-xl shadow-gray-200 w-3/4 h-3/4 fixed top-20 left-44 rounded-3xl overflow-y-hidden'  : 'googlefont hidden bg-white shadow-xl shadow-gray-200 w-3/4 h-3/4 fixed top-20 left-44 rounded-3xl overflow-y-hidden'  " >
+    class="googlefont flex bg-white shadow-xl -translate-x-full shadow-gray-200 w-3/4 h-3/4 fixed top-20 left-44 rounded-3xl overflow-y-hidden" [@openClose]="goForPayment? 'open' : 'close'" >
 
     <div class="w-1/2 p-10">
         <h2 class="text-gray-500 text-4xl font-bold"> Event Details </h2>
@@ -41,7 +41,7 @@
 
     <div class="w-1/2 flex flex-col justify-start gap-12 bg-gray-100 p-7">
         <div class="flex justify-end">
-            <img src="https://cdn-icons-png.freepik.com/256/4338/4338828.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid" alt="cancel" class="w-5 h-5 cursor-pointer" (click)="doPayment()">
+            <img src="https://cdn-icons-png.freepik.com/256/4338/4338828.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid" alt="cancel" class="w-5 h-5 cursor-pointer" (click)="cancelPayment()">
         </div>
 
         <div

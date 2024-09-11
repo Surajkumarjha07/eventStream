@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,12 +8,16 @@ import { RouterModule } from '@angular/router';
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.css'
 })
-export class TicketsComponent {
+export class TicketsComponent{
 
-  constructor() {
-    console.log(window.innerHeight);
-    console.log(window.innerWidth);        
-  }
-
+  @ViewChild('divRef') divRef!: ElementRef ;
   
+  // ngAfterViewInit(): void {
+  //   const divElement = this.divRef.nativeElement;
+  //   const height = divElement.offsetHeight;
+  //   const width = divElement.offsetWidth;
+  //   console.log(height, width);
+    
+  // }  
+
 }

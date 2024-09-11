@@ -18,10 +18,11 @@ export class EventCardComponent {
   @Input() location: string | null = ''
   @Input() price: number | null = 0
   @Input() img: string | null = ''
+  @Input() event_creator: string | null = ''
 
   viewCard() {
     this.router.navigate(['/eventInfo'], {
-      queryParams: {description: this.description, date: this.date, start_time: this.start_time, location: this.location, price: this.price, img: ''},
+      queryParams: {description: this.description, event_creator: this.event_creator, date: this.date, start_time: this.start_time, location: this.location, price: this.price, img: ''},
       queryParamsHandling: 'merge'
     })
     

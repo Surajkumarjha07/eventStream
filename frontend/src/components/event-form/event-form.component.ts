@@ -71,7 +71,7 @@ export class EventFormComponent {
     this.goForPayment = !this.goForPayment
     console.log(this.createEvent.controls.price.value);
     
-    this.paymentsService.sendData(this.createEvent.controls.price.value).subscribe(response => {
+    this.paymentsService.sendData(19900).subscribe(response => {
       this.paymentResponse = response
       console.log(response);
       console.log('Object: ',this.paymentResponse);

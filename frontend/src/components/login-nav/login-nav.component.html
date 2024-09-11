@@ -34,7 +34,7 @@
             </div>
         </li>
 
-        <li>
+        <li class="relative group">
             <div [routerLink]="['/accountInfo']"
                 class="flex justify-center items-center gap-4 cursor-pointer hover:bg-gray-100 px-5 py-1">
                 <div class="rounded-full bg-gray-100 px-4 py-4">
@@ -42,6 +42,15 @@
                         alt="profile" class="w-4 h-4">
                 </div>
                 <p class="font-bold text-gray-500 text-sm"> {{email | lowercase}} </p>
+            </div>
+
+            <div class="group-hover:block absolute top-14 right-0 bg-white py-4 px-10 rounded-md hidden">
+                <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold">
+                    <li class="cursor-pointer"> Manage my events </li>
+                    <li class="cursor-pointer"> Tickets(0) </li>
+                    <li class="cursor-pointer"> Account setting </li>
+                    <li class="cursor-pointer"> Log out </li>
+                </ul>
             </div>
         </li>
 

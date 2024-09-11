@@ -21,11 +21,9 @@
                 </div>
 
                 <div class="w-80 h-max rounded-xl px-4 py-4 bg-white border text-center">
-                    <p class="googlefont font-medium text-xl"> From CA$ 0 </p>
-                    <a [routerLink]="['/getTicket']">
-                        <button class="googlefont bg-orange-600 w-full py-2 mt-6 text-white rounded-md"> Get Tickets
-                        </button>
-                    </a>
+                    <p class="googlefont font-medium text-xl"> From INR {{price}} </p>
+                    <button class="googlefont bg-orange-600 w-full py-2 mt-6 text-white rounded-md" (click)="makePayment()"> Get Tickets
+                    </button>
                 </div>
             </div>
 
