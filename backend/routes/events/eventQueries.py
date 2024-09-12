@@ -51,5 +51,10 @@ async def getEvents(db: Session = Depends(get_db)):
       allEvents = db.query(event).all()
       print(allEvents)
       return allEvents
+
+@router.get('/specificEvent')
+async def specificEvent(category: str | None, db: Session = Depends(get_db)):
+        fetchedEvents = db.query(event).filter(event.category == category).all()
+        return [event.__dict__ for event in fetchedEvents]
       
 app.include_router(router)

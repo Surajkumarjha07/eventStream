@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes.users.userQueries import router
 from routes.events.eventQueries import router as eventRouter
 from routes.payments.payment import router as paymentRouter
-from routes.events.specificEvent import router as specificEvent
+from routes.events.bookTickets import router as ticker
 
 app = FastAPI()
 
@@ -29,4 +29,4 @@ def root():
 app.include_router(router)
 app.include_router(eventRouter)
 app.include_router(paymentRouter)
-app.include_router(specificEvent)
+app.include_router(ticker)

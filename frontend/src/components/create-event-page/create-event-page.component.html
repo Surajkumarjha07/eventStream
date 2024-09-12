@@ -148,7 +148,7 @@
 
             @for (event of Events; track $index) {
                 <div class="w-96 bg-gray-100 flex justify-start items-center gap-5 rounded-lg overflow-hidden cursor-pointer hover:bg-white hover:shadow-lg hover:shadow-gray-300" (click)="navFun($event)">
-                    <img [src]="event.img" alt="templates" class="w-36 h-36">
+                    <img [src]="event.img" alt="templates" class="w-36 h-36 pointer-events-none">
                     <p class="font-semibold text-2xl text-gray-800"> {{event.text}} </p>
                 </div>
             }

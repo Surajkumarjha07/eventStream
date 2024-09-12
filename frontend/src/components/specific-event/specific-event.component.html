@@ -1,10 +1,28 @@
 <section class="googlefont">
-    <div class="w-5/6 mx-auto mt-28">
-        <h1 class="text-gray-500 text-4xl font-extrabold"> {{category?.replace('and', '&')}} </h1>
+    <div class="w-11/12 h-fit overflow-hidden mx-auto relative z-10">
+        <img [src]="currentImg" alt="EventImg" class="w-full h-[34.5rem] rounded-md">
+        <div
+            class="absolute inset-0 rounded-md flex flex-col justify-center {{currentTextCol}} text-4xl font-extrabold px-24 bg-gradient-to-t from-white/30 to-white/0">
+            <h1> {{category?.replace('and', '&')}} </h1>
+            <p class="w-96 mt-8 font-extrabold text-lg"> {{currentSlo}} </p>
+        </div>
     </div>
-    <div class="w-5/6 mx-auto flex justify-start gap-8 my-14">
-        @for (event of fetchedEvents; track $index) {
-            <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time" [location]="event.location" [price]="event.price"></app-event-card>
-        }
+
+    <div class="flex flex-col justify-end items-center gap-20 py-11 {{currentDivCol}} w-screen h-[30rem] absolute top-80">
+        <h1 class="{{currentTextCol}} font-extrabold text-5xl z-20 animate-pulse text-center w-10/12"> {{currentPar}} </h1>
+        <a routerLink="/eventForm">
+            <button class="bg-orange-600 text-white font-bold px-10 py-2 rounded-md"> Create your event </button>
+        </a>
     </div>
+
+    <div class="relative w-5/6 mx-auto mt-64 mb-20">
+        <h1 class="text-4xl font-extrabold text-indigo-950 text-center my-10"> Here are some top picks from us. </h1>
+        <div class="flex justify-start gap-8">
+            @for (event of fetchedEvents; track $index) {
+            <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date"
+                [start_time]="event.start_time" [location]="event.location" [price]="event.price"></app-event-card>
+            }
+        </div>
+    </div>
+
 </section>
