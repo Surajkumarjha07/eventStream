@@ -6,3 +6,25 @@
 .googlefont{
     font-family: "Roboto", sans-serif;
 }
+
+@layer utilities {
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 7px;
+      border-radius: 0.75rem;
+    }
+  
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background-color: #f0f0f0;
+      border-radius: 0.75rem;
+    }
+  
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgb(197, 57, 6);
+      border-radius: 0.75rem;
+    }
+  
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: rgb(170, 46, 2);
+    }
+  }
+  

@@ -9,13 +9,13 @@ router = APIRouter(
 )
 
 @router.post('/bookTicket')
-async def bookTicket(email: str, eventName: str, db: Session = Depends(get_db)):
+async def bookTicket(email: str, eventName: str, date: str, db: Session = Depends(get_db)):
     user = db.query(dbUser).filter(dbUser.email == email).first()
     if user: 
-        BookedEvent = eventBooked(email = email, event_booked = eventName )
+        BookedEvent = eventBooked(email = email, event_booked = eventName, date = date )
         db.add(BookedEvent)
         db.commit()
         db.refresh(BookedEvent)
-        return 'event Created'
+        return 'event booked'
 
 app.include_router(router)

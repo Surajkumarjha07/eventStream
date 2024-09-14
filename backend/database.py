@@ -14,7 +14,8 @@ class dbUser(Base):
      email = Column(String, unique= True)
      password = Column(String)
 
-     eventBook = relationship("eventBooked", back_populates="user", cascade="all,delete-orphan")
+     BookedEvent = relationship("eventBooked", back_populates="BookingUser", cascade="all, delete-orphan")
+     CreatedEvent = relationship("event", back_populates="CreatorUser", cascade="all, delete-orphan")
 
 class eventBooked(Base):
     __tablename__ = 'booked_events'
@@ -23,14 +24,15 @@ class eventBooked(Base):
     name = Column(String)
     email = Column(String, ForeignKey("users.email", ondelete='CASCADE')) 
     event_booked = Column(String)
+    date = Column(String)
 
-    user = relationship("dbUser", back_populates="eventBook")
+    BookingUser = relationship("dbUser", back_populates="BookedEvent")
 
 class event(Base):
     __tablename__ = "events"
 
     id = Column(Integer, primary_key=True, index=True)
-    event_creator = Column(String)
+    event_creator = Column(String, ForeignKey("users.email", ondelete='CASCADE'))
     title = Column(String)
     category = Column(String)
     date = Column(String)
@@ -44,6 +46,8 @@ class event(Base):
     price = Column(Integer)
     capacity = Column(Integer)
     event_img = Column(String)
+
+    CreatorUser = relationship("dbUser", back_populates="CreatedEvent")
 
 def get_db():
     db = sessionLocal()

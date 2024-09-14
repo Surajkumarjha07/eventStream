@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { EventCardComponent } from "../event-card/event-card.component";
 import { GetEventsService } from '../../services/getEvents/get-events.service';
 import { PaymentsService } from '../../services/payments/payments.service';
+import { BookTicketService } from '../../services/bookTicket/book-ticket.service';
+import { DOCUMENT } from '@angular/common';
 declare var Razorpay: any
 
 @Component({
@@ -14,7 +16,7 @@ declare var Razorpay: any
 })
 export class EventInfoComponent implements OnInit {
 
-  constructor(private activatedRouter: ActivatedRoute, private getEventService: GetEventsService, private paymentService: PaymentsService) { }
+  constructor(private activatedRouter: ActivatedRoute, private getEventService: GetEventsService, private paymentService: PaymentsService, private bookTicketService: BookTicketService, @Inject(DOCUMENT) private document: Document) { }
 
   fetchedEvents: any | null = []
 
@@ -27,6 +29,7 @@ export class EventInfoComponent implements OnInit {
   region: string | null = ''
   venue: string | null = ''
   paymentResponse!: any | null
+  email: string | null = ''
 
   ngOnInit(): void {
     this.activatedRouter.queryParams.subscribe((params) => {
@@ -41,11 +44,19 @@ export class EventInfoComponent implements OnInit {
       this.fetchedEvents = response
     })
 
-    this.paymentService.sendData((this.price!*100)).subscribe(response => {
+    this.paymentService.sendData((this.price! * 100)).subscribe(response => {
       this.paymentResponse = response
       console.log(response);
       console.log('Object: ', this.paymentResponse);
     })
+
+    let localStorage = this.document.defaultView?.localStorage;
+
+    let userEmail = localStorage?.getItem('userEmail')
+    if (userEmail) {
+      this.email = userEmail
+    }
+
   }
 
   makePayment = async () => {
@@ -68,6 +79,14 @@ export class EventInfoComponent implements OnInit {
 
     const paymentObject = await new Razorpay(options);
     paymentObject.open()
+  }
+
+  bookEvent() {
+    this.bookTicketService.bookTicket(this.email, this.description, this.date).subscribe((response) => {
+      console.log('booked event', response);
+    })
+
+    this.makePayment()
   }
 
 }
