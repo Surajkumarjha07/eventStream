@@ -30,9 +30,9 @@ export class SignUpComponent {
 
   signUp() {
     const formData = {
-      name: this.signUp_Form.value.name ?? null,
-      email: this.signUp_Form.value.email ?? null,
-      password: this.signUp_Form.value.password ?? null
+      name: this.signUp_Form.value.name?.trim() ?? null,
+      email: this.signUp_Form.value.email?.trim() ?? null,
+      password: this.signUp_Form.value.password?.trim() ?? null
     }
 
     this.signUpService.sendData(formData).subscribe((response) => {

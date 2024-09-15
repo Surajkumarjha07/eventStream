@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter,HTTPException,status,Depends, File, UploadFile, Form
 from models import EventModel
 from sqlalchemy.orm import Session
-from database import get_db,event
+from database import get_db, event, eventBooked
 import os 
 from fastapi.responses import JSONResponse
 
@@ -56,5 +56,31 @@ async def getEvents(db: Session = Depends(get_db)):
 async def specificEvent(category: str | None, db: Session = Depends(get_db)):
         fetchedEvents = db.query(event).filter(event.category == category).all()
         return [event.__dict__ for event in fetchedEvents]
+
+@router.get('/CreatedEvents')
+async def createdEventsByUser(email: str, db: Session = Depends(get_db)):
+       if(email):
+            eventsCreated = list(db.query(event).filter(event.event_creator == email).all())
+            return eventsCreated
+       
+@router.delete('/deleteEventCreated')
+async def delete(email: str, title: str, db: Session = Depends(get_db)):
+    if email and title:
+        eventsList = list(db.query(event).filter(event.event_creator == email).all())
+        for e in eventsList:
+            if(e.title == title):
+                db.delete(e)
+                db.commit()
+                return 'Event Deleted'          
+
+@router.delete('/deleteEventBooked')
+async def delete(email: str, title: str, db: Session = Depends(get_db)):
+    eventsList = list(db.query(eventBooked).filter(event.event_creator == email).all())
+    for e in eventsList:
+          if(e.event_booked == title):
+                db.delete(e)
+                db.commit()
+                return 'Event Deleted'
+       
       
 app.include_router(router)

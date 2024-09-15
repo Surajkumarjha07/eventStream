@@ -32,8 +32,8 @@ export class LoginComponent{
 
   login() {
     const formData = {
-      email: this.login_form.value.email ?? null,
-      password: this.login_form.value.password ?? null
+      email: this.login_form.value.email?.trim() ?? null,
+      password: this.login_form.value.password?.trim() ?? null
     }
 
     this.loginService.sendData(formData.email,formData.password).subscribe((response) => {

@@ -13,7 +13,6 @@ load_dotenv(dotenv_path='./process.env')
 
 KEY_ID = os.getenv('KEY_ID')
 KEY_SECRET = os.getenv('KEY_SECRET')
-print(KEY_ID, KEY_SECRET)
 
 @router.post('/payment')
 async def payment(amount: int):

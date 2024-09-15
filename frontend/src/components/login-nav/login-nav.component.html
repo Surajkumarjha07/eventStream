@@ -46,10 +46,10 @@
 
             <div class="group-hover:block absolute top-14 right-0 bg-white py-4 px-10 rounded-md hidden">
                 <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold">
-                    <li class="cursor-pointer"> Manage my events </li>
-                    <li class="cursor-pointer"> Tickets(0) </li>
+                    <li class="cursor-pointer"> <a routerLink="/manageEvents"> Manage my events </a> </li>
+                    <li class="cursor-default"> Tickets ({{numberofTickets}}) </li>
                     <li class="cursor-pointer"> Account setting </li>
-                    <li class="cursor-pointer"> Log out </li>
+                    <li class="cursor-pointer" (click)="logOut()"> Log out </li>
                 </ul>
             </div>
         </li>

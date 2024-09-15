@@ -102,19 +102,19 @@ export class EventFormComponent {
 
   create() {
     const formData = {
-      event_creator: this.createEvent.value.event_creator ?? null,
-      title: this.createEvent.value.title ?? null,
-      category: this.createEvent.value.category ?? null,
-      date: this.createEvent.value.date ?? null,
-      start_time: this.createEvent.value.start_time ?? null,
-      end_time: this.createEvent.value.end_time ?? null,
-      type: this.createEvent.value.type ?? null,
-      location: this.createEvent.value.location ?? null,
-      building: this.createEvent.value.building ?? null,
-      region: this.createEvent.value.region ?? null,
-      venue: this.createEvent.value.venue ?? null,
+      event_creator: this.createEvent.value.event_creator?.trim() ?? null,
+      title: this.createEvent.value.title?.trim() ?? null,
+      category: this.createEvent.value.category?.trim() ?? null,
+      date: this.createEvent.value.date?.trim() ?? null,
+      start_time: this.createEvent.value.start_time?.trim() ?? null,
+      end_time: this.createEvent.value.end_time?.trim() ?? null,
+      type: this.createEvent.value.type?.trim() ?? null,
+      location: this.createEvent.value.location?.trim() ?? null,
+      building: this.createEvent.value.building?.trim() ?? null,
+      region: this.createEvent.value.region?.trim() ?? null,
+      venue: this.createEvent.value.venue?.trim() ?? null,
       price: this.createEvent.value.price ?? null,
-      capacity: this.createEvent.value.capacity ?? null
+      capacity: this.createEvent.value.capacity ?? null,
     }
 
     console.log(formData.event_creator);

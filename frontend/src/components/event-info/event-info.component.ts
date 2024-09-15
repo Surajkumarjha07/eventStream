@@ -33,10 +33,10 @@ export class EventInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRouter.queryParams.subscribe((params) => {
-      this.description = params['description']
-      this.date = params['date']
-      this.start_time = params['start_time']
-      this.location = params['location']
+      this.description = params['description'].trim()
+      this.date = params['date'].trim()
+      this.start_time = params['start_time'].trim()
+      this.location = params['location'].trim()
       this.price = params['price']
     })
 

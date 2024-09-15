@@ -41,17 +41,17 @@
         <div class="w-2/3" *ngIf="hasTickets()">
             <p class="text-gray-700 font-bold text-3xl mb-10"> Your Tickets </p>
 
-            <div class="flex flex-col justify-start gap-10 h-96 px-10 py-10 rounded-xl overflow-y-scroll custom-scrollbar">
+            <div class="flex flex-col justify-start gap-10 h-fit max-h-96 px-10 py-10 rounded-xl overflow-y-scroll custom-scrollbar">
                 @for (ticket of totalTickets; track $index) {
                 <div class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
                     <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F678047679%2F1681621140333%2F1%2Foriginal.20240119-052142?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=7ebe82ad7bf088d84f0a01f948592f49"
                         alt="eventImg" class="w-20 h-10">
-                    <div class="w-full flex justify-between items-center">
+                    <div class="w-full flex justify-between items-center gap-4">
                         <div>
-                            <h3 class="text-gray-800 font-semibold"> {{ticket.email}} </h3>
-                            <p class="text-gray-800 font-bold"> {{ticket.event_booked}} </p>
+                            <h3 class="text-gray-800 font-semibold text-xs"> {{ticket.email}} </h3>
+                            <p class="text-gray-800 font-bold text-sm"> {{ticket.event_booked}} </p>
                         </div>
-                        <p class="text-gray-800 font-medium"> {{ticket.date}} </p>
+                        <p class="text-gray-800 font-medium text-sm"> {{ticket.date}} </p>
                     </div>
                 </div>
                 }

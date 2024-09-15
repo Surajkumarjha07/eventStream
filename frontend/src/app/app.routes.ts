@@ -10,6 +10,7 @@ import { TicketsComponent } from '../components/tickets/tickets.component';
 import { FindEventsComponent } from '../components/find-events/find-events.component';
 import { PaymentPageComponent } from '../components/payment-page/payment-page.component';
 import { SpecificEventComponent } from '../components/specific-event/specific-event.component';
+import { ManageEventsComponent } from '../components/manage-events/manage-events.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -22,6 +23,7 @@ export const routes: Routes = [
     {path: 'findEvents', component: FindEventsComponent},
     {path: 'payment', component: PaymentPageComponent},
     {path: 'specificEvent', component: SpecificEventComponent},
+    {path: 'manageEvents', component: ManageEventsComponent},
     {path: '', component: HomeComponent},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
