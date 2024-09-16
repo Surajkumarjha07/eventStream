@@ -11,6 +11,7 @@ import { FindEventsComponent } from '../components/find-events/find-events.compo
 import { PaymentPageComponent } from '../components/payment-page/payment-page.component';
 import { SpecificEventComponent } from '../components/specific-event/specific-event.component';
 import { ManageEventsComponent } from '../components/manage-events/manage-events.component';
+import { AccountSettingsComponent } from '../components/account-settings/account-settings.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -24,6 +25,7 @@ export const routes: Routes = [
     {path: 'payment', component: PaymentPageComponent},
     {path: 'specificEvent', component: SpecificEventComponent},
     {path: 'manageEvents', component: ManageEventsComponent},
+    {path: 'accountSettings', component: AccountSettingsComponent},
     {path: '', component: HomeComponent},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

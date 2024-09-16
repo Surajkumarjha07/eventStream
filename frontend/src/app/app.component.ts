@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "../components/navbar/navbar.component";
 import { HomeComponent } from "../components/home/home.component";
@@ -20,6 +20,11 @@ export class AppComponent implements OnInit {
   showNavbar: boolean = true;
   currentUrl: string = ''
   isLoggedIn: boolean = false
+  searchActive!: boolean
+
+  receiveMsg(e: boolean) {
+    this.searchActive = e    
+  }
 
   constructor(@Inject(DOCUMENT) private document: Document ,private router: Router) {
     const localStorage = document.defaultView?.localStorage;

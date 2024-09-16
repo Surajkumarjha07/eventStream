@@ -1,6 +1,6 @@
 @if (showNavbar) {
     @if (isLoggedIn) {
-        <app-login-nav></app-login-nav>
+        <app-login-nav (searchActive)="receiveMsg($event)"></app-login-nav>
     }
     @else {
         <app-navbar></app-navbar>
@@ -8,6 +8,7 @@
 }
 
 <section [ngClass]="isLoggedIn? 'mt-14' : 'mt-16'">
+    <div class="bg-gray-800 opacity-30 w-screen h-screen fixed top-14 z-20" *ngIf="searchActive"></div>
     <router-outlet></router-outlet>
 </section>
 

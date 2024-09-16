@@ -22,7 +22,7 @@ class eventBooked(Base):
 
     id = Column(Integer,index= True, primary_key= True)
     name = Column(String)
-    email = Column(String, ForeignKey("users.email", ondelete='CASCADE')) 
+    email = Column(String, ForeignKey("users.email", onupdate='CASCADE', ondelete='CASCADE')) 
     event_booked = Column(String)
     date = Column(String)
 
@@ -32,7 +32,7 @@ class event(Base):
     __tablename__ = "events"
 
     id = Column(Integer, primary_key=True, index=True)
-    event_creator = Column(String, ForeignKey("users.email", ondelete='CASCADE'))
+    event_creator = Column(String, ForeignKey("users.email", onupdate='CASCADE', ondelete='CASCADE'))
     title = Column(String)
     category = Column(String)
     date = Column(String)

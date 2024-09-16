@@ -32,11 +32,10 @@ async def login(email: str | None, password: str | None, db: Session = Depends(g
     return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please enter all the details")
 
 @router.put('/updateUser')
-async def updateUser(email: str, newEmail: str,newName: str, currentPassword: str, newPassword: str, db: Session = Depends(get_db)):
-    if(email and newEmail and newName and currentPassword and newPassword):
+async def updateUser(email: str,newName: str, newPassword: str, currentPassword: str, db: Session = Depends(get_db)):
+    if(email and newName and currentPassword and newPassword):
         db_user = db.query(dbUser).filter(dbUser.email == email).first()
         if(db_user and db_user.password == currentPassword):
-            db_user.email = newEmail
             db_user.name = newName
             db_user.password = newPassword
             db.commit()
@@ -46,12 +45,25 @@ async def updateUser(email: str, newEmail: str,newName: str, currentPassword: st
             return HTTPException(status_code=status.HTTP_304_NOT_MODIFIED, detail="Incorrect email or password")
     return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please enter details correctly")
 
+@router.put('/updateEmail')
+async def updateEmail(email: str , newEmail: str, password: str, db:Session = Depends(get_db)):
+    if email and newEmail:
+        user = db.query(dbUser).filter(dbUser.email == email).first()
+        if user and user.password == password:
+            user.email = newEmail
+            db.commit()
+            db.refresh(user)
+            return 'Email Updated'
+        else:
+            return 'Incorrect Email or password'
+
 @router.delete('/deleteUser')
 async def deleteUser(email: str | None, password: str | None, db: Session = Depends(get_db)):
     if(email and password):
         db_user = db.query(dbUser).filter(dbUser.email == email).first()
         if(db_user and db_user.password == password):
             db.delete(db_user)
+            db.commit()
             return HTTPException(status_code=status.HTTP_301_MOVED_PERMANENTLY, detail="User deleted")  
         else:
             return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect email or password")

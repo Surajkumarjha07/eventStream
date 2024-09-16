@@ -1,5 +1,5 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { GetTicketService } from '../../services/getTicketByUser/get-ticket.service';
 
@@ -16,12 +16,14 @@ export class LoginNavComponent {
     const localStorage = document.defaultView?.localStorage;
 
   }
-  
+
   loginToken: string | null = ''
   email: string | null = ''
   name: string | null = ''
   numberofTickets: string | null = ''
-
+  searchClicked: boolean = false
+  @Output() searchActive = new EventEmitter<boolean>()
+  
   ngOnInit(): void {
     this.loginToken = localStorage.getItem('loginToken')
     this.email = localStorage.getItem('userEmail')
@@ -31,7 +33,17 @@ export class LoginNavComponent {
     }
   }
 
+  search(e: Event) {
+    let target = e.target as HTMLInputElement
+    // if (target.) {
+    // }
+  }
   
+  toggleSuggestion() {
+    this.searchClicked = true
+    this.searchActive.emit(true)
+  }
+
   GetTicketsByUser() {
     this.getTicket.getTicketByUser(this.email).subscribe((response: any) => {
       this.numberofTickets = response.length

@@ -13,7 +13,8 @@ origins = [
     "http://localhost:4200/login",
     "http://localhost:4200/signUp",
     "http://localhost:4200/eventInfo",
-    "http://localhost:4200/manageEvents"
+    "http://localhost:4200/manageEvents",
+    "http://localhost:4200/accountSettings"
 ]
 
 app.add_middleware(
