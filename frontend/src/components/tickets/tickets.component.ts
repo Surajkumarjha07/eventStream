@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, signal, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GetTicketService } from '../../services/getTicketByUser/get-ticket.service';
 import { CommonModule, DOCUMENT } from '@angular/common';
+import { TicketsService } from '../../services/tickets/tickets.service';
 
 @Component({
   selector: 'app-tickets',
@@ -10,15 +10,23 @@ import { CommonModule, DOCUMENT } from '@angular/common';
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.css'
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent implements OnInit, AfterViewInit {
 
-  constructor( @Inject(DOCUMENT) private document: Document, private getTicket: GetTicketService) {}
+  constructor( @Inject(DOCUMENT) private document: Document, private ticketServices: TicketsService) {}
 
   @ViewChild('divRef') divRef!: ElementRef;
   email: string | null = ''
   totalTickets: any = []
   hasTickets = signal<boolean | null>(null)
   numberofTickets: number = 0
+
+  getwidth() {
+    // let width = this.divRef.nativeElement.innerWidth
+    // let height = this.divRef.nativeElement.innerHeight
+    // console.log(width, height);
+    // // console.log(window);
+    
+  }
 
   ngOnInit(): void {
     let localStorage = this.document.defaultView?.localStorage
@@ -29,6 +37,14 @@ export class TicketsComponent implements OnInit {
       this.GetTicketsByUser()
     }
 
+  }
+  
+  ngAfterViewInit(): void {
+    if (this.divRef) {
+      this.getwidth()
+      
+    }
+    
   }
 
   CheckTicket() {
@@ -46,7 +62,7 @@ export class TicketsComponent implements OnInit {
   }
 
   GetTicketsByUser() {
-    this.getTicket.getTicketByUser(this.email).subscribe((response: any) => {
+    this.ticketServices.getTicketByUser(this.email).subscribe((response: any) => {
       console.log(response);
       this.totalTickets = response
       this.numberofTickets = response.length

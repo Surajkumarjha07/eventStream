@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     let loginToken = localStorage?.getItem('loginToken')
 
     if (loginToken) {
-      this.isLoggedIn = !this.isLoggedIn
+      this.isLoggedIn = true
     }
    }
 

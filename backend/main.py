@@ -5,6 +5,7 @@ from routes.events.eventQueries import router as eventRouter
 from routes.payments.payment import router as paymentRouter
 from routes.events.bookTickets import router as tickets
 from routes.events.getTicketByUser import router as getTickets
+from routes.events.likes import router as likeRouter
 
 app = FastAPI()
 
@@ -34,3 +35,4 @@ app.include_router(eventRouter)
 app.include_router(paymentRouter)
 app.include_router(tickets)
 app.include_router(getTickets)
+app.include_router(likeRouter)

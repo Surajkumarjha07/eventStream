@@ -16,6 +16,7 @@ class dbUser(Base):
 
      BookedEvent = relationship("eventBooked", back_populates="BookingUser", cascade="all, delete-orphan")
      CreatedEvent = relationship("event", back_populates="CreatorUser", cascade="all, delete-orphan")
+     LikedEvents = relationship("like", back_populates="liked")
 
 class eventBooked(Base):
     __tablename__ = 'booked_events'
@@ -48,6 +49,16 @@ class event(Base):
     event_img = Column(String)
 
     CreatorUser = relationship("dbUser", back_populates="CreatedEvent")
+
+class like(Base):
+    __tablename__ = "likes"
+
+    id = Column(Integer, primary_key= True, index= True)
+    name = Column(String)
+    email = Column(String, ForeignKey("users.email", onupdate="CASCADE", ondelete="CASCADE"))
+    liked_events = Column(String, unique= True)
+
+    liked = relationship("dbUser",back_populates="LikedEvents")
 
 def get_db():
     db = sessionLocal()

@@ -1,0 +1,29 @@
+<section class="googlefont h-screen">
+    <div class="flex flex-col justify-center gap-10 w-2/3 h-full mx-auto">
+        <p class="text-5xl font-extrabold"> Likes </p>
+
+        <div class="text-center my-20" *ngIf="fetchedLikes.length == 0; else likeBlock">
+            <img src="https://cdn-icons-png.freepik.com/256/3795/3795963.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                alt="empty" class="w-24 h-24 inline-block my-10">
+            <p class="text-indigo-950 font-semibold text-2xl my-4"> Add events, share with friends! </p>
+            <p class="text-gray-600 font-semibold text-xl"> Easy peasy. </p>
+        </div>
+
+        <ng-template #likeBlock>
+            <div
+                class="flex flex-col justify-start gap-10 h-fit max-h-96 my-16 px-10 py-5 rounded-xl overflow-y-scroll custom-scrollbar">
+                @for (like of fetchedLikes; track $index) {
+                <div
+                    class="bg-gray-100 hover:bg-gray-200 w-2/3 self-end py-5 px-10 rounded-md flex justify-center items-center gap-4 cursor-pointer">
+                    <div class="w-full flex justify-between items-center">
+                        <p class="text-gray-800 font-medium"> {{like.liked_events}} </p>
+                        <img src="https://cdn-icons-png.freepik.com/256/12319/12319558.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                            alt="delete" class="w-5 h-5" (click)="deleteLike($event)">
+                    </div>
+                </div>
+                }
+            </div>
+        </ng-template>
+
+    </div>
+</section>

@@ -1,5 +1,5 @@
 import { CommonModule, DOCUMENT, LowerCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({

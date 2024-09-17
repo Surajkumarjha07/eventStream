@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from '../../services/login/login.service';
 import { Router, RouterModule } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ import { DOCUMENT } from '@angular/common';
 export class LoginComponent{
 
   
-  constructor(@Inject(DOCUMENT) private document: Document, private loginService: LoginService, private router: Router) {
+  constructor(@Inject(DOCUMENT) private document: Document, private userServices: UsersService, private router: Router) {
     const localStorage = document.defaultView?.localStorage;
   }
   
@@ -36,13 +36,16 @@ export class LoginComponent{
       password: this.login_form.value.password?.trim() ?? null
     }
 
-    this.loginService.sendData(formData.email,formData.password).subscribe((response) => {
+    this.userServices.login(formData.email,formData.password).subscribe((response) => {
       console.log("User Logged In", response)
       if (response[2].status_code === 302) {
         localStorage.setItem('loginToken',response[0])
         localStorage.setItem('userEmail', formData.email ?? '')
         localStorage.setItem('userName', response[1])
         this.router.navigateByUrl('/')
+        setTimeout(() => {
+          location.reload()
+        }, 100);
       }
     })
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms'
-import { SignUpService } from '../../services/signUp/sign-up.service';
 import { Router, RouterModule } from '@angular/router';
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class SignUpComponent {
 
-  constructor(private signUpService: SignUpService, private router: Router) {}
+  constructor(private userServices: UsersService , private router: Router) {}
    
   signUp_Form = new FormGroup({
     email: new FormControl<string | null>('',[
@@ -35,7 +35,7 @@ export class SignUpComponent {
       password: this.signUp_Form.value.password?.trim() ?? null
     }
 
-    this.signUpService.sendData(formData).subscribe((response) => {
+    this.userServices.signUp(formData).subscribe((response) => {
       if (response.status_code === 201) {
         console.log("User Created",response)
         this.router.navigateByUrl('/')

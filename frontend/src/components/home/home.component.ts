@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { EventCardComponent } from "../event-card/event-card.component";
-import { RouterModule } from '@angular/router';
-import { GetEventsService } from '../../services/getEvents/get-events.service';
-import { response } from 'express';
+import { Router, RouterModule } from '@angular/router';
+import { EventsService } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-home',
@@ -13,14 +12,18 @@ import { response } from 'express';
 })
 export class HomeComponent implements OnInit{
 
+  constructor(private router: Router) {}
+
   fetchedEvents: any | null = []
 
-  private getEventService = inject(GetEventsService)
+  private eventServices = inject(EventsService)
 
   ngOnInit(): void {
-      this.getEventService.getData().subscribe(response => {
+      this.eventServices.getallEvents().subscribe(response => {
         this.fetchedEvents = response        
       })
+
   }  
+  
 
 }

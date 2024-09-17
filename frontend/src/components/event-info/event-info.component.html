@@ -20,10 +20,16 @@
                         {{building? building : 'JW Marriott Hotel'}} </p>
                 </div>
 
-                <div class="w-80 h-max rounded-xl px-4 py-4 bg-white border text-center">
-                    <p class="googlefont font-medium text-xl"> From INR {{price}} </p>
-                    <button class="googlefont bg-orange-600 w-full py-2 mt-6 text-white rounded-md" (click)="bookEvent()"> Get Tickets
-                    </button>
+                <div>
+                    <div class="w-80 h-max rounded-xl px-4 py-4 bg-white border text-center">
+                        <p class="googlefont font-medium text-xl"> From INR {{price}} </p>
+                        <button class="googlefont bg-orange-600 w-full py-2 mt-6 text-white rounded-md" (click)="bookEvent()"> Get Tickets
+                        </button>
+                    </div>
+                    <div class="flex justify-center items-center gap-4 py-3 cursor-pointer" (click)="addToFavourite()">
+                        <p class="text-indigo-950 font-bold"> Add to favourites </p>
+                        <img [src]="!saved? 'https://t4.ftcdn.net/jpg/06/80/32/77/240_F_680327774_zav9UbAKEShvpA1ONdri6HNKId7sgFUZ.jpg' : 'https://cdn-icons-png.freepik.com/256/5668/5668020.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid'" alt="saved" class="w-5 h-5">
+                    </div>
                 </div>
             </div>
 

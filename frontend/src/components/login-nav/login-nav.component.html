@@ -3,7 +3,7 @@
         <li class="cursor-pointer text-orange-600 font-bold text-2xl" [routerLink]="['/']"> eventStream </li>
         <li class="relative" >
             <input type="search" name="search" id="search"
-                class="w-[40rem] h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full"
+                class="search-container w-[40rem] h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full" autocomplete="off"
                 placeholder="Search events" (input)="search($event)" (click)="toggleSuggestion()">
 
             <div class="w-1/2 absolute top-12 left-0 bg-white py-4 px-10 rounded-md" *ngIf="searchClicked">
@@ -28,7 +28,7 @@
         </li>
 
         <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2"
-            [routerLink]="['/']">
+            [routerLink]="['/likes']">
             <div>
                 <img src="https://cdn-icons-png.freepik.com/256/11488/11488565.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                     alt="add" class="w-5 h-5 mx-auto">

@@ -1,10 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { UpdateInfoService } from '../../services/updateInfo/update-info.service';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { UpdateEmailService } from '../../services/updateEmail/update-email.service';
-import { DeleteUserService } from '../../services/deleteUser/delete-user.service';
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-account-settings',
@@ -20,7 +18,7 @@ export class AccountSettingsComponent implements OnInit {
   showEmailForm!: boolean
   showDeleteForm!: boolean
 
-  constructor(private updateInfoService: UpdateInfoService, private updateEmailService: UpdateEmailService, private deleteUserService: DeleteUserService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private userServices: UsersService, @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     let localStorage = this.document.defaultView?.localStorage
@@ -40,7 +38,7 @@ export class AccountSettingsComponent implements OnInit {
   })
 
   updateInfo() {
-    this.updateInfoService.updateInfo(this.email, this.update_form.controls.newName.value!, this.update_form.controls.newPassword.value!, this.update_form.controls.currentPassword.value!).subscribe(response => {
+    this.userServices.updateInfo(this.email, this.update_form.controls.newName.value!, this.update_form.controls.newPassword.value!, this.update_form.controls.currentPassword.value!).subscribe(response => {
       console.log(response);
     })
   }
@@ -55,7 +53,7 @@ export class AccountSettingsComponent implements OnInit {
   })
 
   updateEmail() {
-    this.updateEmailService.updateEmail(this.email, this.update_Email.controls.newEmail.value!, this.update_Email.controls.password.value!).subscribe(response => {
+    this.userServices.updateEmail(this.email, this.update_Email.controls.newEmail.value!, this.update_Email.controls.password.value!).subscribe(response => {
       console.log(response);
     })
   }
@@ -72,7 +70,7 @@ export class AccountSettingsComponent implements OnInit {
     let target = e.target as HTMLButtonElement
     if (target.innerText === 'Yes') {
       console.log(target.innerText);
-      this.deleteUserService.deleteUser(this.email, this.delete_User.controls.password.value!).subscribe(response => {
+      this.userServices.deleteUser(this.email, this.delete_User.controls.password.value!).subscribe(response => {
         console.log(response);
         this.showBox = false
         this.delete_User.controls.password.setValue('')

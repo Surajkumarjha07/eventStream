@@ -2,9 +2,10 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CreateEventService } from '../../services/createEvent/create-event.service';
 import { PaymentPageComponent } from "../payment-page/payment-page.component";
 import { PaymentsService } from '../../services/payments/payments.service';
+import { UsersService } from '../../services/users/users.service';
+import { EventsService } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-event-form',
@@ -23,7 +24,7 @@ export class EventFormComponent {
   goForPayment: boolean = false
   paymentResponse: any | null = {}
 
-  constructor(@Inject(DOCUMENT) private document: Document, private createEventService: CreateEventService, private paymentsService: PaymentsService ) { 
+  constructor(@Inject(DOCUMENT) private document: Document, private eventServices: EventsService, private paymentsService: PaymentsService ) { 
     const localStorage = document.defaultView?.localStorage;
     const email = localStorage?.getItem('userEmail')
     if (email) {
@@ -120,7 +121,7 @@ export class EventFormComponent {
     console.log(formData.event_creator);
 
 
-    this.createEventService.sendData(formData).subscribe(response => {
+    this.eventServices.createEvents(formData).subscribe(response => {
       console.log("event created", response);
     })
   }

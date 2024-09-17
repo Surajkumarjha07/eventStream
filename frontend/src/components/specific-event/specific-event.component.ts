@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
-import { SpecificEventService } from '../../services/specificEvent/specific-event.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { EventCardComponent } from '../event-card/event-card.component';
+import { EventsService } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-specific-event',
@@ -12,7 +12,7 @@ import { EventCardComponent } from '../event-card/event-card.component';
 })
 export class SpecificEventComponent implements OnInit {
 
-  constructor(private getEventService: SpecificEventService, private router: ActivatedRoute) { }
+  constructor(private eventServices: EventsService, private router: ActivatedRoute) { }
   fetchedEvents: any | null = []
   category: string | null = ''
   currentImg: string | null = ''
@@ -39,7 +39,7 @@ export class SpecificEventComponent implements OnInit {
 
   getData(category: string | null) {
 
-    this.getEventService.getData(category).subscribe(response => {
+    this.eventServices.getCreatedEventsByUser(category).subscribe(response => {
       console.log(response);
       this.fetchedEvents = response
     })

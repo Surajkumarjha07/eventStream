@@ -1,10 +1,7 @@
 import { Component, Inject, OnInit, signal } from '@angular/core';
-import { GetCreatedEventsByUserService } from '../../services/getCreatedEventsByUser/get-created-events-by-user.service';
 import { DOCUMENT } from '@angular/common';
-import { response } from 'express';
-import { GetTicketService } from '../../services/getTicketByUser/get-ticket.service';
-import { DeleteEventCreatedService } from '../../services/deleteEventCreated/delete-event-created.service';
-import { DeleteEventBookedService } from '../../services/deleteEventBookedd/delete-event-booked.service';
+import { EventsService } from '../../services/events/events.service';
+import { TicketsService } from '../../services/tickets/tickets.service';
 
 @Component({
   selector: 'app-manage-events',
@@ -20,7 +17,7 @@ export class ManageEventsComponent implements OnInit {
   totalEventsBooked: any | null = []
   title = signal<string | null>('')
 
-  constructor(private getCreatedEventsByUser: GetCreatedEventsByUserService, private getBookedEvents: GetTicketService, private deleteCreatedEvent: DeleteEventCreatedService, private deleteBookedEvent: DeleteEventBookedService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private eventServices: EventsService, private ticketServices: TicketsService, @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     let localStorage = this.document.defaultView?.localStorage
@@ -28,12 +25,12 @@ export class ManageEventsComponent implements OnInit {
 
     if (userEmail) {
       this.email = userEmail
-      this.getCreatedEventsByUser.getCreatedEvents(this.email).subscribe((response) => {
+      this.eventServices.getCreatedEventsByUser(this.email).subscribe((response) => {
         console.log(response);
         this.totalEventsCreated = response
       })
 
-      this.getBookedEvents.getTicketByUser(this.email).subscribe((response) => {
+      this.ticketServices.getTicketByUser(this.email).subscribe((response) => {
         console.log(response);
         this.totalEventsBooked = response
       })
@@ -51,7 +48,7 @@ export class ManageEventsComponent implements OnInit {
 
     if (this.email && this.title()) {
 
-      this.deleteCreatedEvent.deleteEvent(this.email, this.title()).subscribe(response => {
+      this.eventServices.deleteEventCreated(this.email, this.title()).subscribe(response => {
         console.log(response);
         location.reload()      
       })
@@ -68,7 +65,7 @@ export class ManageEventsComponent implements OnInit {
 
     if (this.email && this.title()) {
 
-      this.deleteBookedEvent.deleteEvent(this.email, this.title()).subscribe(response => {
+      this.eventServices.deleteEventBooked(this.email, this.title()).subscribe(response => {
         console.log(response);
         location.reload()      
       })

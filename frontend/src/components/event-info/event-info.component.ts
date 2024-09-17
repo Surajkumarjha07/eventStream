@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { EventCardComponent } from "../event-card/event-card.component";
-import { GetEventsService } from '../../services/getEvents/get-events.service';
 import { PaymentsService } from '../../services/payments/payments.service';
-import { BookTicketService } from '../../services/bookTicket/book-ticket.service';
 import { DOCUMENT } from '@angular/common';
+import { LikesService } from '../../services/likes/likes.service';
+import { EventsService } from '../../services/events/events.service';
+import { TicketsService } from '../../services/tickets/tickets.service';
 declare var Razorpay: any
 
 @Component({
@@ -16,7 +17,7 @@ declare var Razorpay: any
 })
 export class EventInfoComponent implements OnInit {
 
-  constructor(private activatedRouter: ActivatedRoute, private getEventService: GetEventsService, private paymentService: PaymentsService, private bookTicketService: BookTicketService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private activatedRouter: ActivatedRoute, private ticketServices: TicketsService, private eventService: EventsService, private paymentService: PaymentsService, private likeService: LikesService, @Inject(DOCUMENT) private document: Document) { }
 
   fetchedEvents: any | null = []
 
@@ -30,6 +31,8 @@ export class EventInfoComponent implements OnInit {
   venue: string | null = ''
   paymentResponse!: any | null
   email: string | null = ''
+  name: string | null = ''
+  saved: boolean = false
 
   ngOnInit(): void {
     this.activatedRouter.queryParams.subscribe((params) => {
@@ -40,7 +43,7 @@ export class EventInfoComponent implements OnInit {
       this.price = params['price']
     })
 
-    this.getEventService.getData().subscribe(response => {
+    this.eventService.getallEvents().subscribe(response => {
       this.fetchedEvents = response
     })
 
@@ -53,10 +56,18 @@ export class EventInfoComponent implements OnInit {
     let localStorage = this.document.defaultView?.localStorage;
 
     let userEmail = localStorage?.getItem('userEmail')
-    if (userEmail) {
+    let userName = localStorage?.getItem('userName')
+    if (userEmail && userName) {
       this.email = userEmail
+      this.name = userName
     }
+  }
 
+  addToFavourite() {
+    this.likeService.CreateLikes(this.name!, this.email!, this.description!).subscribe(response => {
+      console.log(response);
+      this.saved = true
+    })
   }
 
   makePayment = async () => {
@@ -82,7 +93,7 @@ export class EventInfoComponent implements OnInit {
   }
 
   bookEvent() {
-    this.bookTicketService.bookTicket(this.email, this.description, this.date).subscribe((response) => {
+    this.ticketServices.bookTicket(this.email, this.description, this.date).subscribe((response) => {
       console.log('booked event', response);
     })
 
