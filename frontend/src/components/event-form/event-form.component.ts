@@ -1,5 +1,5 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, signal } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PaymentPageComponent } from "../payment-page/payment-page.component";
@@ -19,10 +19,10 @@ export class EventFormComponent {
   LocDetails: boolean = false
   userEmail = signal<string>('')
   eventType = signal<string>('')
-  // isDisabled = signal<boolean>(false)
   isDisabled: boolean = false
   goForPayment: boolean = false
   paymentResponse: any | null = {}
+  hideLocDetails: boolean = false
 
   constructor(@Inject(DOCUMENT) private document: Document, private eventServices: EventsService, private paymentsService: PaymentsService ) { 
     const localStorage = document.defaultView?.localStorage;
@@ -83,9 +83,25 @@ export class EventFormComponent {
 
   getLocType(e: Event) {
     const targetVal = e.target as HTMLDivElement
-    if (targetVal.innerHTML) {
-      this.eventType.set(targetVal.innerHTML)
+    let previousTarget: string = ''    
+    
+    if (targetVal.children[1].innerHTML) {
+      this.eventType.set(targetVal.children[1].innerHTML)
       console.log(this.eventType());
+      this.hideLocDetails = false
+      if (targetVal.children[1].innerHTML !== previousTarget) {
+        targetVal.style.backgroundColor = 'red'
+      }
+      else{
+        targetVal.style.backgroundColor = 'white'
+      }
+      previousTarget = targetVal.children[1].innerHTML
+      console.log(previousTarget);
+      
+    }
+
+    if (targetVal.children[1].innerHTML.trim() === 'Online event') {
+      this.hideLocDetails = true
     }
 
     this.createEvent.get('type')?.setValue(this.eventType());

@@ -81,6 +81,13 @@ async def delete(email: str, title: str, db: Session = Depends(get_db)):
                 db.delete(e)
                 db.commit()
                 return 'Event Deleted'
+          
+@router.get('/geteventBytitle')
+async def getEvent(title: str, db: Session = Depends(get_db)):
+      fetchedEvents = db.query(event).filter(event.title == title).first()
+      if fetchedEvents:
+            return fetchedEvents
+      return 'Not found'          
        
       
 app.include_router(router)

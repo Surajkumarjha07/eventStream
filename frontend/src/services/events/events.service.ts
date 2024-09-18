@@ -38,4 +38,8 @@ export class EventsService {
     return this.http.get(`http://127.0.0.1:8000/events/specificEvent?category=${category}`)
   }
 
+  getEventsByTitle(title: string) {
+    return this.http.get(`http://127.0.0.1:8000/events/geteventBytitle?title=${title}`)
+  }
+
 }

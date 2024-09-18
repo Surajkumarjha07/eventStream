@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule, DOCUMENT } from '@angular/common';
@@ -78,7 +78,6 @@ export class AccountSettingsComponent implements OnInit {
     }
     else if (target.innerText === 'No') {
       console.log(target.innerText);
-      alert('Not allowed')
       this.showBox = false
       this.delete_User.controls.password.setValue('')
     }
@@ -86,7 +85,9 @@ export class AccountSettingsComponent implements OnInit {
 
   deleteUser(e: Event) {
     e.preventDefault()
-    this.showBox = true
+    if (this.delete_User.controls.password.value) {
+      this.showBox = true
+    }
   }
 
   getform(e: Event) {
@@ -107,6 +108,15 @@ export class AccountSettingsComponent implements OnInit {
       this.showDeleteForm = true
       this.showInfoForm = false
       this.showEmailForm = false
+    }
+  }
+
+  @HostListener("document:click",['$event'])
+  documentClick(e: MouseEvent) {
+    let target = e.target as HTMLElement
+
+    if (!target.classList.contains('.sureBox')) {
+      this.showBox = false
     }
   }
 

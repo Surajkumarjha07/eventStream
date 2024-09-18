@@ -1,6 +1,6 @@
 <section class="googlefont w-4/5 bg-white h-fit mx-auto shadow-xl shadow-gray-200">
-    <div class="bg-gray-50 w-full h-fit py-20 px-10" id="parentDiv">
-        <div class="flex justify-start items-center gap-4 w-fit">
+    <div class="bg-gray-50 w-full h-fit py-20 px-10" #divRef>
+        <div class="flex justify-start items-center gap-4 w-fit" #divRef2>
             <div class="bg-white w-32 h-32 rounded-full flex justify-center items-center shadow-lg shadow-gray-200">
                 <img src="https://cdn-icons-png.freepik.com/256/15049/15049767.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                     alt="profile" class="w-10 h-10">
@@ -49,7 +49,7 @@
                     <div class="w-full flex justify-between items-center gap-4">
                         <div>
                             <h3 class="text-gray-800 font-semibold text-xs"> {{ticket.email}} </h3>
-                            <p class="text-gray-800 font-bold text-sm"> {{ticket.event_booked}} </p>
+                            <p class="text-gray-800 font-bold text-sm hover:underline" (click)="eventClicked($event)"> {{ticket.event_booked}} </p>
                         </div>
                         <p class="text-gray-800 font-medium text-sm"> {{ticket.date}} </p>
                     </div>
@@ -59,4 +59,37 @@
         </div>
         }
     </div>
+
+    <div
+    class="w-full h-full bg-gray-800 bg-opacity-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0" *ngIf="OpenClicked">
+    <div class="openedBox bg-white shadow-md shadow-gray-100 w-1/2 h-fit py-10 rounded-xl">
+        <p class="ml-10 text-orange-600 font-bold text-2xl"> eventStream </p>
+        <div class="px-20">
+            <div class="flex justify-between font-semibold text-gray-600 my-8">
+                <p> Your Event </p>
+                <p class="w-64 text-end"> {{fetchedEvent.title}} </p>
+            </div>
+
+            <div class="flex justify-between font-semibold text-gray-600 my-8">
+                <p> Category</p>
+                <p> {{fetchedEvent.category}} </p>
+            </div>
+
+            <div class="flex justify-between font-semibold text-gray-600 my-8">
+                <p> Price </p>
+                <p> $ {{fetchedEvent.price}} </p>
+            </div>
+
+            <div class="flex justify-between font-semibold text-gray-600 my-8">
+                <p> Capacity </p>
+                <p> {{fetchedEvent.capacity}} </p>
+            </div>
+        </div>
+
+        <div class="flex justify-center items-center mt-4">
+                <button class="bg-orange-600 w-full text-white text-xl font-bold text-center px-12 py-2 pointer-events-none"> You've booked this event ! </button>
+        </div>
+    </div>
+</div>
+
 </section>
