@@ -1,6 +1,6 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PaymentPageComponent } from "../payment-page/payment-page.component";
 import { PaymentsService } from '../../services/payments/payments.service';
@@ -23,6 +23,13 @@ export class EventFormComponent {
   goForPayment: boolean = false
   paymentResponse: any | null = {}
   hideLocDetails: boolean = false
+  selectedDiv: number = 0
+  choosenFile: string = ''
+  TypesArray: any | null = [
+    {img: 'https://cdn-icons-png.freepik.com/256/402/402326.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid', text: 'Venue'},
+    {img: 'https://cdn-icons-png.freepik.com/256/5762/5762756.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid', text: 'Online event'},
+    {img: 'https://cdn-icons-png.freepik.com/256/7806/7806633.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid', text: 'To be announced'}
+  ]
 
   constructor(@Inject(DOCUMENT) private document: Document, private eventServices: EventsService, private paymentsService: PaymentsService ) { 
     const localStorage = document.defaultView?.localStorage;
@@ -49,6 +56,7 @@ export class EventFormComponent {
     venue: new FormControl<string | null>('', []),
     price: new FormControl<number | null>(null, Validators.required),
     capacity: new FormControl<number | null>(null, [Validators.required]),
+    imageFile: new FormControl<BinaryData | null>(null, [Validators.required])
   })
 
   disable() {
@@ -81,36 +89,34 @@ export class EventFormComponent {
     
   }
 
-  getLocType(e: Event) {
+  getLocType(e: Event, index: number) {
     const targetVal = e.target as HTMLDivElement
-    let previousTarget: string = ''    
+    this.selectedDiv = index
     
     if (targetVal.children[1].innerHTML) {
       this.eventType.set(targetVal.children[1].innerHTML)
-      console.log(this.eventType());
       this.hideLocDetails = false
-      if (targetVal.children[1].innerHTML !== previousTarget) {
-        targetVal.style.backgroundColor = 'red'
-      }
-      else{
-        targetVal.style.backgroundColor = 'white'
-      }
-      previousTarget = targetVal.children[1].innerHTML
-      console.log(previousTarget);
-      
     }
 
     if (targetVal.children[1].innerHTML.trim() === 'Online event') {
+      this.eventType.set(targetVal.children[1].innerHTML)
       this.hideLocDetails = true
+      this.LocDetails = false
     }
+    console.log(this.eventType());
 
     this.createEvent.get('type')?.setValue(this.eventType());
-    // targetVal.style.backgroundColor = 'rgb(96, 165, 250)'
-
   }
 
   showLocDetails() {
     this.LocDetails = !this.LocDetails
+  }
+
+  getFile(e: Event) {
+    let target = e.target as HTMLInputElement
+    console.log(target.value);
+    this.choosenFile = target.value
+    
   }
 
   // this.createEventService.sendData(formData.event_creator,formData.title,formData.category,formData.date,formData.start_time, formData.end_time, formData.type, formData.location, formData.building, formData.region, formData.venue, formData.price, formData.capacity, fileData.event_img).subscribe((response) => {
@@ -132,6 +138,7 @@ export class EventFormComponent {
       venue: this.createEvent.value.venue?.trim() ?? null,
       price: this.createEvent.value.price ?? null,
       capacity: this.createEvent.value.capacity ?? null,
+      imageFile: this.createEvent.value.imageFile ?? null
     }
 
     console.log(formData.event_creator);

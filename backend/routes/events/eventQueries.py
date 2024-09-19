@@ -13,38 +13,38 @@ router = APIRouter(
 
 @router.post('/createEvent')
 async def create_event(
-    # evt: EventModel = Depends(),
-    evt: EventModel,
-    # file: UploadFile = File(...),
+    evt: EventModel = Depends(),
+    # evt: EventModel,
+    file: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
         
-        # userImages = 'uploads'
-        # if not os.path.exists(userImages):
-        #       os.mkdir(userImages)
+        userImages = 'uploads'
+        if not os.path.exists(userImages):
+              os.mkdir(userImages)
 
-        # ImageFile = await file.read()
-        # print(ImageFile)
-        # FileName = evt.title + file.filename
-        # print(FileName)
+        ImageFile = await file.read()
+        print(ImageFile)
+        FileName = evt.title + file.filename
+        print(FileName)
 
-        # ImagePath = os.path.join(userImages,FileName)
-        # print(ImagePath)
+        ImagePath = os.path.join(userImages,FileName)
+        print(ImagePath)
 
-        # with open(ImagePath, 'wb') as uploadFolder:
-        #     uploadFolder.write(ImageFile)
+        with open(ImagePath, 'wb') as uploadFolder:
+            uploadFolder.write(ImageFile)
             
-        # print(f"File created and path written to: {ImagePath}")
+        print(f"File created and path written to: {ImagePath}")
 
-        # CreatedEvent = event(event_creator=evt.event_creator, title=evt.title, category=evt.category, date=evt.date, start_time=evt.start_time, end_time=evt.end_time, type=evt.type, location=evt.location, building=evt.building, region=evt.region, venue=evt.venue, price=evt.price, capacity=evt.capacity, event_img=FileName) 
+        CreatedEvent = event(event_creator=evt.event_creator, title=evt.title, category=evt.category, date=evt.date, start_time=evt.start_time, end_time=evt.end_time, type=evt.type, location=evt.location, building=evt.building, region=evt.region, venue=evt.venue, price=evt.price, capacity=evt.capacity, event_img=FileName) 
 
-        CreatedEvent = event(event_creator=evt.event_creator, title=evt.title, category=evt.category, date=evt.date, start_time=evt.start_time, end_time=evt.end_time, type=evt.type, location=evt.location, building=evt.building, region=evt.region, venue=evt.venue, price=evt.price, capacity=evt.capacity) 
+        # CreatedEvent = event(event_creator=evt.event_creator, title=evt.title, category=evt.category, date=evt.date, start_time=evt.start_time, end_time=evt.end_time, type=evt.type, location=evt.location, building=evt.building, region=evt.region, venue=evt.venue, price=evt.price, capacity=evt.capacity) 
 
         db.add(CreatedEvent)
         db.commit()
         db.refresh(CreatedEvent)
-        # return {'user': CreatedEvent, 'filename': file.filename}  
-        return {'event': CreatedEvent}    
+        return {'user': CreatedEvent, 'filename': file.filename}  
+        # return {'event': CreatedEvent}    
 
 @router.get('/allEvents')
 async def getEvents(db: Session = Depends(get_db)):

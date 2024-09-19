@@ -39,7 +39,7 @@ export class SpecificEventComponent implements OnInit {
 
   getData(category: string | null) {
 
-    this.eventServices.getCreatedEventsByUser(category).subscribe(response => {
+    this.eventServices.getEventsByCategory(category).subscribe(response => {
       console.log(response);
       this.fetchedEvents = response
     })

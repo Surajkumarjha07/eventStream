@@ -16,7 +16,7 @@
     </div>
 
     <div class="relative w-5/6 mx-auto mt-64 mb-20">
-        <h1 class="text-4xl font-extrabold text-indigo-950 text-center my-10"> Here are some top picks from us. </h1>
+        <h1 class="text-4xl font-extrabold text-indigo-950 text-center my-10 underline"> {{fetchedEvents.length !== 0 ? 'Here are some top picks from us.': 'Sorry! at the moment we have no events of this category.'}} </h1>
         <div class="flex justify-start gap-8">
             @for (event of fetchedEvents; track $index) {
             <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date"

@@ -14,7 +14,7 @@ export class EventsService {
     })
   }
 
-  createEvents(data: {event_creator: string | null, title: string | null, category: string | null, date: string | null, start_time: string | null, end_time: string | null, type: string | null, location: string | null, building: string | null, region: string | null, venue: string | null, price: number | null, capacity: number | null}) {
+  createEvents(data: {event_creator: string | null, title: string | null, category: string | null, date: string | null, start_time: string | null, end_time: string | null, type: string | null, location: string | null, building: string | null, region: string | null, venue: string | null, price: number | null, capacity: number | null,imageFile: BinaryData | null}) {
     return this.http.post('http://127.0.0.1:8000/events/createEvent', data, this.httpOptions) 
   }
 
