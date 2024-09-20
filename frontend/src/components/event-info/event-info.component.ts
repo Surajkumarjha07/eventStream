@@ -29,6 +29,7 @@ export class EventInfoComponent implements OnInit {
   building: string | null = ''
   region: string | null = ''
   venue: string | null = ''
+  event_img: string | null = ''
   paymentResponse!: any | null
   email: string | null = ''
   name: string | null = ''
@@ -41,6 +42,7 @@ export class EventInfoComponent implements OnInit {
       this.start_time = params['start_time'].trim()
       this.location = params['location'].trim()
       this.price = params['price']
+      this.event_img = params['event_img']
     })
 
     this.eventService.getallEvents().subscribe(response => {
@@ -93,7 +95,7 @@ export class EventInfoComponent implements OnInit {
   }
 
   bookEvent() {
-    this.ticketServices.bookTicket(this.email, this.description, this.date).subscribe((response) => {
+    this.ticketServices.bookTicket(this.email, this.description, this.date, this.event_img).subscribe((response) => {
       console.log('booked event', response);
     })
 

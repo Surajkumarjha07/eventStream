@@ -7,7 +7,7 @@
             @for (event of totalEventsCreated; track $index) {
             <div
                 class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
-                <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F678047679%2F1681621140333%2F1%2Foriginal.20240119-052142?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=7ebe82ad7bf088d84f0a01f948592f49"
+                <img [src]="'http://localhost:8000/uploads/' + event.event_img"
                     alt="eventImg" class="w-20 h-10">
                 <div class="w-full flex justify-between items-center">
                     <div>
@@ -32,7 +32,7 @@
             @for (event of totalEventsBooked; track $index) {
             <div
                 class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
-                <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F678047679%2F1681621140333%2F1%2Foriginal.20240119-052142?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=7ebe82ad7bf088d84f0a01f948592f49"
+                <img [src]="'http://localhost:8000/uploads/' + event.event_img"
                     alt="eventImg" class="w-20 h-10">
                 <div class="w-full flex justify-between items-center">
                     <div>

@@ -1,9 +1,9 @@
-<nav class="googlefont border-b border-2 fixed right-0 top-0 left-0 z-50 bg-white">
+<nav class="googlefont border-b border-2 fixed w-full top-0 left-0 z-50 bg-white">
     <ul class="flex justify-around items-center">
         <li class="cursor-pointer text-orange-600 font-bold text-2xl" [routerLink]="['/']"> eventStream </li>
         <li class="relative" >
             <input type="search" name="search" id="search"
-                class="search-container w-[40rem] h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full" autocomplete="off"
+                class="search-container w-[40rem] h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full max-md:w-20" autocomplete="off"
                 placeholder="Search events" (input)="search($event)" (click)="toggleSuggestion()">
 
             <div class="w-1/2 absolute top-12 left-0 bg-white py-4 px-10 rounded-md" *ngIf="searchClicked">

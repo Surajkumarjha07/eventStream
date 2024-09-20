@@ -155,8 +155,8 @@
             </div>
 
             <div class="w-full h-fit relative border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-2 rounded-lg">
-                <div class="w-ful bg-white text-gray-800 font-bold text-lg pointer-events-none cursor-pointer"> {{!choosenFile? 'Choose an Image': 'choosen File - ' + choosenFile}} </div>
-                <input type="file" name="imageFile" class="w-full absolute inset-0 opacity-0 cursor-pointer" (input)="getFile($event)">
+                <div class="w-ful bg-white text-gray-800 font-bold text-lg pointer-events-none cursor-pointer"> {{!choosenFile? 'Choose an Image': 'choosen File - ' + choosenFile.name}} </div>
+                <input type="file" name="imageFile" class="w-full absolute inset-0 opacity-0 cursor-pointer" (change)="getFile($event)">
             </div>
 
             <input type="submit" value="Create Event"

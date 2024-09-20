@@ -33,7 +33,7 @@
                 @for (event of fetchedEvents; track $index) {
                 @if (event.location === 'Delhi') {
                 <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date ? event.date : 'To be announced'" [start_time]="event.start_time ? event.start_time : '(time not confirmed yet)'"
-                    [location]="event.location" [price]="event.price"></app-event-card>
+                    [location]="event.location" [price]="event.price" [event_img]="event.event_img"></app-event-card>
                 }
                 }
             </div>
@@ -46,7 +46,7 @@
                 @for (event of fetchedEvents; track $index) {
                 @if (event.category === 'Online Event') {
                 <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time"
-                    [location]="event.location" [price]="event.price"></app-event-card>
+                    [location]="event.location" [price]="event.price" [event_img]="event.event_img"></app-event-card>
                 }
                 }
             </div>
@@ -59,7 +59,7 @@
                 @for (event of fetchedEvents; track $index) {
                 @if (event.category === 'Festivals and Fairs Event') {
                 <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time"
-                    [location]="event.location" [price]="event.price"></app-event-card>
+                    [location]="event.location" [price]="event.price" [event_img]="event.event_img"></app-event-card>
                 }
                 }
             </div>
@@ -72,7 +72,7 @@
                 @for (event of fetchedEvents; track $index) {
                 @if (event.category === 'Classes and Workshops Event') {
                 <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time"
-                    [location]="event.location" [price]="event.price"></app-event-card>
+                    [location]="event.location" [price]="event.price" [event_img]="event.event_img"></app-event-card>
                 }
                 }
             </div>
