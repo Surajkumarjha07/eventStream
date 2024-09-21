@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +17,6 @@ declare var Razorpay: any
     trigger('openClose', [
       state('open', style({
         opacity: 1,
-        // zIndex: '4',
         transform: 'translateX(0%)'
       })),
 
@@ -38,10 +37,12 @@ export class PaymentPageComponent implements OnInit {
 
   captchaCode: number = 0
   captchaMatched: boolean = false
+  ResponseCode: string | null = ''
   @Input() goForPayment!: boolean
   @Input() price: number | null = 0
   @Input() event_creator: string | null = ''
   @Input() paymentResponse: any | null = {}
+  @Output() razorpay_signature = new EventEmitter<string | null>()
 
   generateCaptcha() {
     let min = 12000
@@ -79,7 +80,11 @@ export class PaymentPageComponent implements OnInit {
       "description": "Event Booking Transaction",
       "image": "https://whattheai.tech/wp-content/uploads/2023/08/Logo_NixerAI.png",
       "order_id": `${this.paymentResponse?.id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1 - "order_IluGWxBm9U8zJ8"
-      "handler": function (response: any) {
+      "handler": (response: any) => {
+        console.log(response);
+        this.ResponseCode = response.razorpay_signature
+        console.log('responsecode', this.ResponseCode);
+        this.razorpay_signature.emit(this.ResponseCode)
         alert('Payment Successfull!')
       },
       "theme": {
@@ -87,8 +92,10 @@ export class PaymentPageComponent implements OnInit {
       }
     };
 
-    const paymentObject = await new Razorpay(options);
-    paymentObject.open()
+    if (this.paymentResponse.id) {
+      const paymentObject = await new Razorpay(options);
+      paymentObject.open()
+    }
   }
 
 }

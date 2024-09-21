@@ -10,7 +10,7 @@
     <div class="w-1/3 mx-auto mt-20 text-start">
         <h1 class="text-4xl font-bold text-gray-800"> Create an event with us </h1>
 
-        <form class="my-8 text-gray-800" [formGroup]="createEvent" (submit)="create()">
+        <form class="my-8 text-gray-800" [formGroup]="createEvent" (submit)="doPayment()">
 
             <!-- Event Title -->
             <div>
@@ -160,7 +160,7 @@
             </div>
 
             <input type="submit" value="Create Event"
-                class="bg-orange-600 w-44 rounded-lg cursor-pointer text-white py-2 my-10" (click)="doPayment()">
+                class="bg-orange-600 w-44 rounded-lg cursor-pointer text-white py-2 my-10">
         </form>
     </div>
 
@@ -170,4 +170,4 @@
 </section>
 
 <app-payment-page [goForPayment]="goForPayment" [price]="createEvent.controls.price.value"
-    [event_creator]="createEvent.controls.event_creator.value" [paymentResponse]="paymentResponse"></app-payment-page>
+    [event_creator]="createEvent.controls.event_creator.value" [paymentResponse]="paymentResponse" (razorpay_signature)="getSignature($event)"></app-payment-page>

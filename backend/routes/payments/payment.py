@@ -17,7 +17,7 @@ KEY_SECRET = os.getenv('KEY_SECRET')
 @router.post('/payment')
 async def payment(amount: int):
     client = razorpay.Client(auth=(KEY_ID,KEY_SECRET))
-    data = { "amount": amount | 0, "currency": "INR", "receipt": "order_rcptid_11" }
+    data = { "amount": amount | 0, "currency": "INR", "receipt": "order_rcptid_11"}
     payment = client.order.create(data=data)
     return payment
 

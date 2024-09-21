@@ -6,17 +6,23 @@
     <section class="w-full border-b-2">
         <!-- Main Upper section -->
         <section class="w-5/6 mx-auto">
-            <div class="py-10 mx-auto max-md:mx-auto h-[32rem]">
-                <img [src]="'http://localhost:8000/uploads/' + event_img"
-                    alt="EventImg" class="mx-auto rounded-xl w-full h-full">
+            <div class="relative mx-auto my-10 max-md:mx-auto h-[28rem] rounded-2xl overflow-hidden">
+                <div class="w-full h-full bg-gray-500 bg-opacity-50 backdrop-blur-xl z-20 absolute inset-0"> </div>
+                <img [src]="'http://localhost:8000/uploads/' + event_img" alt="EventImg"
+                class="rounded-xl w-full h-full absolute inset-0 z-10">
+                <img [src]="'http://localhost:8000/uploads/' + event_img" alt="EventImg"
+                class="rounded-xl w-3/4 h-full mx-auto absolute inset-0 z-30">
             </div>
 
             <div class="flex justify-between items-center max-md:block h-auto mx-auto">
                 <div>
                     <h2 class="googlefont text-blue-950 font-semibold text-xl max-md:text-sm"> Friday, August 30 </h2>
-                    <h1 class="googlefont text-indigo-950 font-extrabold text-5xl w-[40rem] my-4 max-md:text-lg max-md:w-full"> {{description}} -
+                    <h1
+                        class="googlefont text-indigo-950 font-extrabold text-5xl w-[40rem] my-4 max-md:text-lg max-md:w-full">
+                        {{description}} -
                         {{location}} </h1>
-                    <p class="googlefont text-blue-950 font-medium my-8 max-md:text-sm"> Join us in {{location}} on {{date}}, at the
+                    <p class="googlefont text-blue-950 font-medium my-8 max-md:text-sm"> Join us in {{location}} on
+                        {{date}}, at the
                         {{building? building : 'JW Marriott Hotel'}} </p>
                 </div>
 
@@ -51,7 +57,8 @@
                         alt="Calendar" class="w-4 h-5">
 
                     <div>
-                        <p class="googlefont font-medium text-blue-950 max-md:text-sm"> {{building? building : 'JW Marriott Hotel'}}
+                        <p class="googlefont font-medium text-blue-950 max-md:text-sm"> {{building? building :
+                            'JWMarriott Hotel'}}
                             {{location}} </p>
                         <p class="googlefont text-xs my-2 text-blue-950"> {{region? region : 'Asset Area 4'}} - {{venue?
                             venue :
@@ -69,15 +76,21 @@
         <!-- Main Lower section -->
         <section class="w-5/6 mx-auto">
             <h1 class="text-blue-950 text-2xl font-bold my-10"> Other events you may like </h1>
-            <div class="flex flex-wrap justify-start gap-8">
-                @for (event of fetchedEvents; track $index) {
-                    @if ($index < 8) {
-                        <app-event-card [description]="event.title" [date]="event.date" [start_time]="event.start_time"
-                        [location]="event.location" [price]="event.price" [event_img]="event.event_img"></app-event-card>
-                    }
-                }
 
-            </div>
+            <div class="w-full h-[28rem] mx-auto mt-10 bg-gradient-to-b from-gray-300 to-white/30 mb-10 rounded-xl animate-pulse"
+                *ngIf="loading; else visibleBlock"></div>
+
+            <ng-template #visibleBlock>
+                <div class="flex flex-wrap justify-start gap-8">
+                    @for (event of fetchedEvents; track $index) {
+                    @if ($index < 8) { <app-event-card [description]="event.title" [date]="event.date"
+                        [start_time]="event.start_time" [location]="event.location" [price]="event.price"
+                        [event_img]="event.event_img"></app-event-card>
+                        }
+                        }
+
+                </div>
+            </ng-template>
         </section>
     </section>
 
