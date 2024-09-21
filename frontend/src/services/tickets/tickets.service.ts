@@ -14,8 +14,8 @@ export class TicketsService {
     })
   }
 
-  bookTicket(email: string | null, eventName: string | null, date: string | null) {
-    return this.http.post(`http://127.0.0.1:8000/events/bookTicket?email=${email}&eventName=${eventName}&date=${date}`, this.httpOptions)
+  bookTicket(email: string | null, eventName: string | null, date: string | null, event_img: string | null) {
+    return this.http.post(`http://127.0.0.1:8000/events/bookTicket?email=${email}&eventName=${eventName}&date=${date}&event_img=${event_img}`, this.httpOptions)
   }
 
   getTicketByUser(email: string | null) {

@@ -10,11 +10,11 @@ class EventModel(BaseModel):
     event_creator: str
     title: str
     category: str
-    date: str
-    start_time: str
-    end_time: str
+    date: Optional[str] | None
+    start_time: Optional[str] | None
+    end_time: Optional[str] | None
     type: str
-    location: str
+    location: Optional[str] | None
     building: Optional[str] = None
     region: Optional[str] = None
     venue: Optional[str] = None

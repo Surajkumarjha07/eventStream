@@ -26,6 +26,7 @@ class eventBooked(Base):
     email = Column(String, ForeignKey("users.email", onupdate='CASCADE', ondelete='CASCADE')) 
     event_booked = Column(String)
     date = Column(String)
+    event_img = Column(String)
 
     BookingUser = relationship("dbUser", back_populates="BookedEvent")
 

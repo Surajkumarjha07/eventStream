@@ -44,7 +44,7 @@
             <div class="flex flex-col justify-start gap-10 h-fit max-h-96 px-10 py-10 rounded-xl overflow-y-scroll custom-scrollbar">
                 @for (ticket of totalTickets; track $index) {
                 <div class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
-                    <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F678047679%2F1681621140333%2F1%2Foriginal.20240119-052142?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=7ebe82ad7bf088d84f0a01f948592f49"
+                    <img [src]="'http://localhost:8000/uploads/' + ticket.event_img"
                         alt="eventImg" class="w-20 h-10">
                     <div class="w-full flex justify-between items-center gap-4">
                         <div>
@@ -87,7 +87,7 @@
         </div>
 
         <div class="flex justify-center items-center mt-4">
-                <button class="bg-orange-600 w-full text-white text-xl font-bold text-center px-12 py-2 pointer-events-none"> You've booked this event ! </button>
+                <button class="bg-orange-600 w-1/3 rounded-xl text-white text-xl font-bold text-center px-12 py-2" (click)="printTicket()"> Print Ticket ! </button>
         </div>
     </div>
 </div>

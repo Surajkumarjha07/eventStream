@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, effect, Inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { EventCardComponent } from "../event-card/event-card.component";
 import { PaymentsService } from '../../services/payments/payments.service';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { LikesService } from '../../services/likes/likes.service';
 import { EventsService } from '../../services/events/events.service';
 import { TicketsService } from '../../services/tickets/tickets.service';
@@ -11,13 +11,21 @@ declare var Razorpay: any
 @Component({
   selector: 'app-event-info',
   standalone: true,
-  imports: [RouterModule, EventCardComponent],
+  imports: [RouterModule, EventCardComponent, CommonModule],
   templateUrl: './event-info.component.html',
   styleUrl: './event-info.component.css'
 })
 export class EventInfoComponent implements OnInit {
 
-  constructor(private activatedRouter: ActivatedRoute, private ticketServices: TicketsService, private eventService: EventsService, private paymentService: PaymentsService, private likeService: LikesService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private activatedRouter: ActivatedRoute, private ticketServices: TicketsService, private eventService: EventsService, private paymentService: PaymentsService, private likeService: LikesService, @Inject(DOCUMENT) private document: Document) {
+    effect(() => {
+      if (this.ResponseCode()) {
+        this.ticketServices.bookTicket(this.email, this.description, this.date, this.event_img).subscribe((response) => {
+          console.log('booked event', response);
+        })    
+      }
+    })
+   }
 
   fetchedEvents: any | null = []
 
@@ -29,22 +37,28 @@ export class EventInfoComponent implements OnInit {
   building: string | null = ''
   region: string | null = ''
   venue: string | null = ''
+  event_img: string | null = ''
   paymentResponse!: any | null
   email: string | null = ''
   name: string | null = ''
   saved: boolean = false
+  loading: boolean = true
+  ResponseCode = signal<string | null>('')
 
   ngOnInit(): void {
+    this.loading = true
     this.activatedRouter.queryParams.subscribe((params) => {
       this.description = params['description'].trim()
       this.date = params['date'].trim()
       this.start_time = params['start_time'].trim()
       this.location = params['location'].trim()
       this.price = params['price']
+      this.event_img = params['event_img']
     })
 
     this.eventService.getallEvents().subscribe(response => {
       this.fetchedEvents = response
+      this.loading = false
     })
 
     this.paymentService.sendData((this.price! * 100)).subscribe(response => {
@@ -80,7 +94,9 @@ export class EventInfoComponent implements OnInit {
       "description": "Event Booking Transaction",
       "image": "https://whattheai.tech/wp-content/uploads/2023/08/Logo_NixerAI.png",
       "order_id": `${this.paymentResponse?.id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1 - "order_IluGWxBm9U8zJ8"
-      "handler": function (response: any) {
+      "handler": (response: any) => {
+        console.log(response);        
+        this.ResponseCode.set(response.razorpay_signature)
         alert('Payment Successfull!')
       },
       "theme": {
@@ -93,10 +109,6 @@ export class EventInfoComponent implements OnInit {
   }
 
   bookEvent() {
-    this.ticketServices.bookTicket(this.email, this.description, this.date).subscribe((response) => {
-      console.log('booked event', response);
-    })
-
     this.makePayment()
   }
 

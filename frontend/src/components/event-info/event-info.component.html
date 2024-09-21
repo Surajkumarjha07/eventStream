@@ -1,55 +1,64 @@
 <!-- Main section -->
 
-<section class="bg-gray-50">
+<section class="bg-gray-50 w-screen h-full max-md:h-full max-md:w-screen overflow-x-hidden">
 
     <!-- Upper Section -->
-    <section class="bg-white w-full border-b-2">
+    <section class="w-full border-b-2">
         <!-- Main Upper section -->
-        <section class="w-5/6 mx-auto bg-white">
-            <div class="py-10 mx-auto  h-[28rem]">
-                <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F678047679%2F1681621140333%2F1%2Foriginal.20240119-052142?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=7ebe82ad7bf088d84f0a01f948592f49"
-                    alt="EventImg" class="mx-auto rounded-xl w-full h-full">
+        <section class="w-5/6 mx-auto">
+            <div class="relative mx-auto my-10 max-md:mx-auto h-[28rem] rounded-2xl overflow-hidden">
+                <div class="w-full h-full bg-gray-500 bg-opacity-50 backdrop-blur-xl z-20 absolute inset-0"> </div>
+                <img [src]="'http://localhost:8000/uploads/' + event_img" alt="EventImg"
+                class="rounded-xl w-full h-full absolute inset-0 z-10">
+                <img [src]="'http://localhost:8000/uploads/' + event_img" alt="EventImg"
+                class="rounded-xl w-3/4 h-full mx-auto absolute inset-0 z-30">
             </div>
 
-            <div class="flex justify-between items-center  h-auto mx-auto">
+            <div class="flex justify-between items-center max-md:block h-auto mx-auto">
                 <div>
-                    <h2 class="googlefont text-blue-950 font-semibold text-xl"> Friday, August 30 </h2>
-                    <h1 class="googlefont text-indigo-950 font-extrabold text-5xl w-[40rem] my-4"> {{description}} -
+                    <h2 class="googlefont text-blue-950 font-semibold text-xl max-md:text-sm"> Friday, August 30 </h2>
+                    <h1
+                        class="googlefont text-indigo-950 font-extrabold text-5xl w-[40rem] my-4 max-md:text-lg max-md:w-full">
+                        {{description}} -
                         {{location}} </h1>
-                    <p class="googlefont text-blue-950 font-medium my-8"> Join us in {{location}} on {{date}}, at the
+                    <p class="googlefont text-blue-950 font-medium my-8 max-md:text-sm"> Join us in {{location}} on
+                        {{date}}, at the
                         {{building? building : 'JW Marriott Hotel'}} </p>
                 </div>
 
-                <div>
-                    <div class="w-80 h-max rounded-xl px-4 py-4 bg-white border text-center">
+                <div class="max-md:my-5">
+                    <div class="w-80 h-fit max-md:w-60 max-md:mx-auto rounded-xl px-4 py-4 bg-white border text-center">
                         <p class="googlefont font-medium text-xl"> From INR {{price}} </p>
-                        <button class="googlefont bg-orange-600 w-full py-2 mt-6 text-white rounded-md" (click)="bookEvent()"> Get Tickets
+                        <button class="googlefont bg-orange-600 w-full max-md:w-36 py-2 mt-6 text-white rounded-md"
+                            (click)="bookEvent()"> Get Tickets
                         </button>
                     </div>
                     <div class="flex justify-center items-center gap-4 py-3 cursor-pointer" (click)="addToFavourite()">
                         <p class="text-indigo-950 font-bold"> Add to favourites </p>
-                        <img [src]="!saved? 'https://t4.ftcdn.net/jpg/06/80/32/77/240_F_680327774_zav9UbAKEShvpA1ONdri6HNKId7sgFUZ.jpg' : 'https://cdn-icons-png.freepik.com/256/5668/5668020.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid'" alt="saved" class="w-5 h-5">
+                        <img [src]="!saved? 'https://t4.ftcdn.net/jpg/06/80/32/77/240_F_680327774_zav9UbAKEShvpA1ONdri6HNKId7sgFUZ.jpg' : 'https://cdn-icons-png.freepik.com/256/5668/5668020.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid'"
+                            alt="saved" class="w-5 h-5">
                     </div>
                 </div>
             </div>
 
-            <div class=" h-auto mx-auto my-4">
-                <h3 class="googlefont text-blue-950 font-bold text-2xl"> Date and time </h3>
+            <div class="h-fit">
+                <h3 class="googlefont text-blue-950 font-bold text-2xl max-md:text-lg"> Date and time </h3>
                 <div class="flex justify-start items-center gap-4 my-2">
                     <img src="https://cdn-icons-png.freepik.com/256/15999/15999772.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                         alt="Calendar" class="w-5 h-5">
-                    <p class="googlefont font-medium text-blue-950"> {{date}} · {{start_time}} IST </p>
+                    <p class="googlefont font-medium text-blue-950 text-sm"> {{date}} · {{start_time}} IST </p>
                 </div>
             </div>
 
             <div class=" h-auto mx-auto my-10">
-                <h3 class="googlefont text-blue-950 font-bold text-2xl"> Location </h3>
+                <h3 class="googlefont text-blue-950 font-bold text-2xl max-md:text-lg"> Location </h3>
                 <div class="flex justify-start items-start gap-4 my-2">
                     <img src="https://cdn-icons-png.freepik.com/256/11376/11376553.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                         alt="Calendar" class="w-4 h-5">
 
-                    <div class="">
-                        <p class="googlefont font-medium text-blue-950"> {{building? building : 'JW Marriott Hotel'}}
+                    <div>
+                        <p class="googlefont font-medium text-blue-950 max-md:text-sm"> {{building? building :
+                            'JWMarriott Hotel'}}
                             {{location}} </p>
                         <p class="googlefont text-xs my-2 text-blue-950"> {{region? region : 'Asset Area 4'}} - {{venue?
                             venue :
@@ -67,13 +76,21 @@
         <!-- Main Lower section -->
         <section class="w-5/6 mx-auto">
             <h1 class="text-blue-950 text-2xl font-bold my-10"> Other events you may like </h1>
-            <div class="flex flex-wrap justify-start gap-8">
-                @for (event of fetchedEvents; track $index) {
-                @if (event.id <= 8) { <app-event-card [description]="event.title" [date]="event.date"
-                    [start_time]="event.start_time" [location]="event.location" [price]="event.price"></app-event-card>
-                    }
-                    }
-            </div>
+
+            <div class="w-full h-[28rem] mx-auto mt-10 bg-gradient-to-b from-gray-300 to-white/30 mb-10 rounded-xl animate-pulse"
+                *ngIf="loading; else visibleBlock"></div>
+
+            <ng-template #visibleBlock>
+                <div class="flex flex-wrap justify-start gap-8">
+                    @for (event of fetchedEvents; track $index) {
+                    @if ($index < 8) { <app-event-card [description]="event.title" [date]="event.date"
+                        [start_time]="event.start_time" [location]="event.location" [price]="event.price"
+                        [event_img]="event.event_img"></app-event-card>
+                        }
+                        }
+
+                </div>
+            </ng-template>
         </section>
     </section>
 

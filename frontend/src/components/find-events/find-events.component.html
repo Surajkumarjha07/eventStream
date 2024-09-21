@@ -25,59 +25,71 @@
         </div>
     </section>
 
-    <section class="py-10">
-        <div class="w-5/6 mx-auto">
-            <h1 class="text-2xl text-gray-600 font-bold mb-10"> Popular in Delhi </h1>
+    <div class="w-5/6 h-[28rem] mx-auto mt-10 bg-gradient-to-b from-gray-300 to-white/30 mb-10 rounded-xl animate-pulse"
+        *ngIf="loading; else visibleBlock"></div>
 
-            <div class="flex flex-wrap justify-start gap-8">
-                @for (event of fetchedEvents; track $index) {
-                @if (event.location === 'Delhi') {
-                <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date ? event.date : 'To be announced'" [start_time]="event.start_time ? event.start_time : '(time not confirmed yet)'"
-                    [location]="event.location" [price]="event.price"></app-event-card>
-                }
-                }
+    <ng-template #visibleBlock>
+        <section class="py-10">
+            <div class="w-5/6 mx-auto">
+                <h1 class="text-2xl text-gray-600 font-bold mb-10"> Popular in Delhi </h1>
+
+                <div class="flex flex-wrap justify-start gap-8">
+                    @for (event of fetchedEvents; track $index) {
+                    @if (event.location === 'Delhi') {
+                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                        [date]="event.date ? event.date : 'To be announced'"
+                        [start_time]="event.start_time ? event.start_time : '(time not confirmed yet)'"
+                        [location]="event.location" [price]="event.price"
+                        [event_img]="event.event_img"></app-event-card>
+                    }
+                    }
+                </div>
             </div>
-        </div>
 
-        <div class="w-5/6 mx-auto mt-16">
-            <h1 class="text-2xl text-gray-600 font-bold mb-10"> Online Events </h1>
+            <div class="w-5/6 mx-auto mt-16">
+                <h1 class="text-2xl text-gray-600 font-bold mb-10"> Online Events </h1>
 
-            <div class="flex flex-wrap justify-start gap-8">
-                @for (event of fetchedEvents; track $index) {
-                @if (event.category === 'Online Event') {
-                <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time"
-                    [location]="event.location" [price]="event.price"></app-event-card>
-                }
-                }
+                <div class="flex flex-wrap justify-start gap-8">
+                    @for (event of fetchedEvents; track $index) {
+                    @if (event.category === 'Online Event') {
+                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                        [date]="event.date" [start_time]="event.start_time" [location]="event.location"
+                        [price]="event.price" [event_img]="event.event_img"></app-event-card>
+                    }
+                    }
+                </div>
             </div>
-        </div>
 
-        <div class="w-5/6 mx-auto mt-16">
-            <h1 class="text-2xl text-gray-600 font-bold mb-10"> Festivals and Fairs Events </h1>
+            <div class="w-5/6 mx-auto mt-16">
+                <h1 class="text-2xl text-gray-600 font-bold mb-10"> Festivals and Fairs Events </h1>
 
-            <div class="flex flex-wrap justify-start gap-8">
-                @for (event of fetchedEvents; track $index) {
-                @if (event.category === 'Festivals and Fairs Event') {
-                <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time"
-                    [location]="event.location" [price]="event.price"></app-event-card>
-                }
-                }
+                <div class="flex flex-wrap justify-start gap-8">
+                    @for (event of fetchedEvents; track $index) {
+                    @if (event.category === 'Festivals and Fairs Event') {
+                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                        [date]="event.date" [start_time]="event.start_time" [location]="event.location"
+                        [price]="event.price" [event_img]="event.event_img"></app-event-card>
+                    }
+                    }
+                </div>
             </div>
-        </div>
 
-        <div class="w-5/6 mx-auto mt-16">
-            <h1 class="text-2xl text-gray-600 font-bold mb-10"> Classes and workshops Events </h1>
+            <div class="w-5/6 mx-auto mt-16">
+                <h1 class="text-2xl text-gray-600 font-bold mb-10"> Classes and workshops Events </h1>
 
-            <div class="flex flex-wrap justify-start gap-8">
-                @for (event of fetchedEvents; track $index) {
-                @if (event.category === 'Classes and Workshops Event') {
-                <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date" [start_time]="event.start_time"
-                    [location]="event.location" [price]="event.price"></app-event-card>
-                }
-                }
+                <div class="flex flex-wrap justify-start gap-8">
+                    @for (event of fetchedEvents; track $index) {
+                    @if (event.category === 'Classes and Workshops Event') {
+                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                        [date]="event.date" [start_time]="event.start_time" [location]="event.location"
+                        [price]="event.price" [event_img]="event.event_img"></app-event-card>
+                    }
+                    }
+                </div>
             </div>
-        </div>
 
-    </section>
+        </section>
+    </ng-template>
+
 
 </section>

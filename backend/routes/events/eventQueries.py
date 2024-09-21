@@ -3,7 +3,7 @@ from models import EventModel
 from sqlalchemy.orm import Session
 from database import get_db, event, eventBooked
 import os 
-from fastapi.responses import JSONResponse
+from typing import Optional
 
 app = FastAPI()
 router = APIRouter(
@@ -11,46 +11,57 @@ router = APIRouter(
     tags=['events']
 )
 
+userImages = 'uploads'
+if not os.path.exists(userImages):
+    os.mkdir(userImages)
+
+Path = os.path.join(os.getcwd(), userImages)
+print(Path)
+
 @router.post('/createEvent')
 async def create_event(
-    # evt: EventModel = Depends(),
-    evt: EventModel,
-    # file: UploadFile = File(...),
+    event_creator: str = Form(...),
+    title: str = Form(...),
+    category: str = Form(...),
+    date: Optional[str] = Form(None),
+    start_time: Optional[str] = Form(None),
+    end_time: Optional[str] = Form(None),
+    type: str = Form(...),
+    location: Optional[str] = Form(None),
+    building: Optional[str] = Form(None),
+    region: Optional[str] = Form(None),
+    venue: Optional[str] = Form(None),
+    price: Optional[int] = Form(0),
+    capacity: int = Form(...),
+
+    event_img: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
-        
-        # userImages = 'uploads'
-        # if not os.path.exists(userImages):
-        #       os.mkdir(userImages)
+        ImageFile = await event_img.read()
+        print(ImageFile)
+        FileName = title + event_img.filename
+        print(FileName)
 
-        # ImageFile = await file.read()
-        # print(ImageFile)
-        # FileName = evt.title + file.filename
-        # print(FileName)
+        ImagePath = os.path.join(userImages,FileName)
+        print(ImagePath)
 
-        # ImagePath = os.path.join(userImages,FileName)
-        # print(ImagePath)
-
-        # with open(ImagePath, 'wb') as uploadFolder:
-        #     uploadFolder.write(ImageFile)
+        with open(ImagePath, 'wb') as uploadFolder:
+            uploadFolder.write(ImageFile)
             
-        # print(f"File created and path written to: {ImagePath}")
+        print(f"File created and path written to: {ImagePath}")
 
-        # CreatedEvent = event(event_creator=evt.event_creator, title=evt.title, category=evt.category, date=evt.date, start_time=evt.start_time, end_time=evt.end_time, type=evt.type, location=evt.location, building=evt.building, region=evt.region, venue=evt.venue, price=evt.price, capacity=evt.capacity, event_img=FileName) 
-
-        CreatedEvent = event(event_creator=evt.event_creator, title=evt.title, category=evt.category, date=evt.date, start_time=evt.start_time, end_time=evt.end_time, type=evt.type, location=evt.location, building=evt.building, region=evt.region, venue=evt.venue, price=evt.price, capacity=evt.capacity) 
+        CreatedEvent = event(event_creator=event_creator, title=title, category=category, date=date, start_time=start_time, end_time=end_time, type=type, location=location, building=building, region=region, venue=venue, price=price, capacity=capacity, event_img=FileName) 
 
         db.add(CreatedEvent)
         db.commit()
         db.refresh(CreatedEvent)
-        # return {'user': CreatedEvent, 'filename': file.filename}  
-        return {'event': CreatedEvent}    
+        return {'user': CreatedEvent, 'filename': event_img.filename}  
 
 @router.get('/allEvents')
 async def getEvents(db: Session = Depends(get_db)):
-      allEvents = db.query(event).all()
-      print(allEvents)
-      return allEvents
+    allEvents = list(db.query(event).all())
+    print(allEvents)
+    return allEvents
 
 @router.get('/specificEvent')
 async def specificEvent(category: str | None, db: Session = Depends(get_db)):
@@ -87,7 +98,6 @@ async def getEvent(title: str, db: Session = Depends(get_db)):
       fetchedEvents = db.query(event).filter(event.title == title).first()
       if fetchedEvents:
             return fetchedEvents
-      return 'Not found'          
+      return 'Not found'               
        
-      
 app.include_router(router)

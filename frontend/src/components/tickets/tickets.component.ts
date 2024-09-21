@@ -93,6 +93,70 @@ export class TicketsComponent implements OnInit {
     })
   }
 
+  printTicket() {
+    var printContent = this.document.getElementById('print')
+    const main = `<html>
+
+<head>
+    <title>eventStream Tickets</title>
+    <style>
+        .openedBox {
+            background-color: white;
+        }
+
+        .mainDiv{
+            color: rgb(71, 71, 71);
+            width: 75vw;
+            font-weight: bold;
+            margin: 0 auto;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .Heading{
+            color: rgb(219, 63, 6);
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .child-div{
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="openedBox">
+        <div class="mainDiv">
+            <p class="Heading">eventStream</p>
+            <div class="child-div">
+                <p>Your Event</p>
+                <p>${this.fetchedEvent.title}</p>
+            </div>
+            <div class="child-div">
+                <p>Category</p>
+                <p>${this.fetchedEvent.category}</p>
+            </div>
+            <div class="child-div">
+                <p>Price</p>
+                <p>$ ${this.fetchedEvent.price}</p>
+            </div>
+            <div class="child-div">
+                <p>Capacity</p>
+                <p>${this.fetchedEvent.capacity}</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>`;
+    let w = window.open()
+    w?.document.write(main)
+    w?.print()
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     let target = event.target as HTMLElement
