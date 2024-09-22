@@ -6,7 +6,7 @@
     <section class="w-full border-b-2">
         <!-- Main Upper section -->
         <section class="w-5/6 mx-auto">
-            <div class="relative mx-auto my-10 max-md:mx-auto h-[28rem] rounded-2xl overflow-hidden">
+            <div class="relative mx-auto my-10 max-md:mx-auto h-[28rem] max-[428px]:h-[10rem] max-[428px]:mt-16 max-lg:mt-20 max-lg:h-[18rem] rounded-2xl overflow-hidden">
                 <div class="w-full h-full bg-gray-500 bg-opacity-50 backdrop-blur-xl z-20 absolute inset-0"> </div>
                 <img [src]="'http://localhost:8000/uploads/' + event_img" alt="EventImg"
                 class="rounded-xl w-full h-full absolute inset-0 z-10">
@@ -14,11 +14,11 @@
                 class="rounded-xl w-3/4 h-full mx-auto absolute inset-0 z-30">
             </div>
 
-            <div class="flex justify-between items-center max-md:block h-auto mx-auto">
+            <div class="flex justify-between items-center max-[1200px]:block h-auto mx-auto">
                 <div>
                     <h2 class="googlefont text-blue-950 font-semibold text-xl max-md:text-sm"> Friday, August 30 </h2>
                     <h1
-                        class="googlefont text-indigo-950 font-extrabold text-5xl w-[40rem] my-4 max-md:text-lg max-md:w-full">
+                        class="googlefont text-indigo-950 font-extrabold text-5xl w-[40rem] my-4 max-md:text-lg max-[1200px]:w-full max-[1200px]:text-4xl">
                         {{description}} -
                         {{location}} </h1>
                     <p class="googlefont text-blue-950 font-medium my-8 max-md:text-sm"> Join us in {{location}} on
@@ -26,8 +26,8 @@
                         {{building? building : 'JW Marriott Hotel'}} </p>
                 </div>
 
-                <div class="max-md:my-5">
-                    <div class="w-80 h-fit max-md:w-60 max-md:mx-auto rounded-xl px-4 py-4 bg-white border text-center">
+                <div class="max-md:mx-auto max-[1200px]:my-5 max-[1200px]:w-fit">
+                    <div class="w-80 h-fit max-md:w-60 rounded-xl px-4 py-4 bg-white border text-center">
                         <p class="googlefont font-medium text-xl"> From INR {{price}} </p>
                         <button class="googlefont bg-orange-600 w-full max-md:w-36 py-2 mt-6 text-white rounded-md"
                             (click)="bookEvent()"> Get Tickets
@@ -81,7 +81,7 @@
                 *ngIf="loading; else visibleBlock"></div>
 
             <ng-template #visibleBlock>
-                <div class="flex flex-wrap justify-start gap-8">
+                <div class="flex flex-wrap justify-start max-md:justify-center gap-8">
                     @for (event of fetchedEvents; track $index) {
                     @if ($index < 8) { <app-event-card [description]="event.title" [date]="event.date"
                         [start_time]="event.start_time" [location]="event.location" [price]="event.price"

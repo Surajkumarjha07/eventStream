@@ -1,18 +1,19 @@
 <section class="googlefont w-4/5 bg-white h-fit mx-auto shadow-xl shadow-gray-200">
     <div class="bg-gray-50 w-full h-fit py-20 px-10" #divRef>
         <div class="flex justify-start items-center gap-4 w-fit" #divRef2>
-            <div class="bg-white w-32 h-32 rounded-full flex justify-center items-center shadow-lg shadow-gray-200">
+            <div
+                class="bg-white w-32 h-32 rounded-full flex justify-center items-center shadow-lg shadow-gray-200 max-md:w-24 max-md:h-24">
                 <img src="https://cdn-icons-png.freepik.com/256/15049/15049767.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
-                    alt="profile" class="w-10 h-10">
+                    alt="profile" class="w-10 h-10 max-md:w-7 max-md:h-7">
             </div>
             <div>
-                <p class="text-3xl font-bold text-gray-800"> Chico kumar jha </p>
+                <p class="text-3xl font-bold text-gray-800 max-md:text-sm"> Chico kumar jha </p>
                 <p class="text-gray-400 font-medium text-sm my-4"> {{numberofTickets}} tickets </p>
             </div>
         </div>
     </div>
 
-    <div class="flex justify-end h-fit px-28 py-20">
+    <div class="flex justify-end h-fit px-28 py-20 max-md:px-0">
         @if (!hasTickets()) {
         <div class="w-2/3">
 
@@ -38,20 +39,24 @@
         }
 
         @else {
-        <div class="w-2/3" *ngIf="hasTickets()">
-            <p class="text-gray-700 font-bold text-3xl mb-10"> Your Tickets </p>
+        <div class="w-2/3 max-[1100px]:w-full max-md:px-2" *ngIf="hasTickets()">
+            <p class="text-gray-700 font-bold text-3xl mb-10 max-md:text-sm"> Your Tickets </p>
 
-            <div class="flex flex-col justify-start gap-10 h-fit max-h-96 px-10 py-10 rounded-xl overflow-y-scroll custom-scrollbar">
+            <div
+                class="flex flex-col justify-start gap-10 h-fit max-h-96 px-10 py-10 rounded-xl overflow-y-scroll custom-scrollbar max-md:w-full max-[1250px]:px-2">
                 @for (ticket of totalTickets; track $index) {
-                <div class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
-                    <img [src]="'http://localhost:8000/uploads/' + ticket.event_img"
-                        alt="eventImg" class="w-20 h-10">
+                <div
+                    class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
+                    <img [src]="'http://localhost:8000/uploads/' + ticket.event_img" alt="eventImg"
+                        class="w-20 h-10 max-md:w-10 max-md:h-8">
                     <div class="w-full flex justify-between items-center gap-4">
                         <div>
-                            <h3 class="text-gray-800 font-semibold text-xs"> {{ticket.email}} </h3>
-                            <p class="text-gray-800 font-bold text-sm hover:underline" (click)="eventClicked($event)"> {{ticket.event_booked}} </p>
+                            <h3 class="text-gray-800 font-semibold text-xs max-md:text-[10px] max-md:hidden">
+                                {{ticket.email}} </h3>
+                            <p class="text-gray-800 font-bold text-sm hover:underline max-md:text-[12px]"
+                                (click)="eventClicked($event)"> {{ticket.event_booked}} </p>
                         </div>
-                        <p class="text-gray-800 font-medium text-sm"> {{ticket.date}} </p>
+                        <p class="text-gray-800 font-medium text-sm max-md:text-[10px]"> {{ticket.date}} </p>
                     </div>
                 </div>
                 }
@@ -60,36 +65,37 @@
         }
     </div>
 
-    <div
-    class="w-full h-full bg-gray-800 bg-opacity-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0" *ngIf="OpenClicked">
-    <div class="openedBox bg-white shadow-md shadow-gray-100 w-1/2 h-fit py-10 rounded-xl">
-        <p class="ml-10 text-orange-600 font-bold text-2xl"> eventStream </p>
-        <div class="px-20">
-            <div class="flex justify-between font-semibold text-gray-600 my-8">
-                <p> Your Event </p>
-                <p class="w-64 text-end"> {{fetchedEvent.title}} </p>
+    <div class="w-full h-full bg-gray-800 bg-opacity-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0"
+        *ngIf="OpenClicked">
+        <div class="openedBox bg-white shadow-md shadow-gray-100 w-1/2 h-fit py-10 rounded-xl max-md:w-2/3  max-md:py-2 max-md:text-xs">
+            <p class="text-orange-600 font-bold text-2xl max-md:text-sm max-md:mx-auto text-center"> eventStream </p>
+            <div class="px-20 max-md:px-2">
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
+                    <p> Your Event </p>
+                    <p class="w-64 text-end"> {{fetchedEvent.title}} </p>
+                </div>
+
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
+                    <p> Category</p>
+                    <p> {{fetchedEvent.category}} </p>
+                </div>
+
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
+                    <p> Price </p>
+                    <p> $ {{fetchedEvent.price}} </p>
+                </div>
+
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
+                    <p> Capacity </p>
+                    <p> {{fetchedEvent.capacity}} </p>
+                </div>
             </div>
 
-            <div class="flex justify-between font-semibold text-gray-600 my-8">
-                <p> Category</p>
-                <p> {{fetchedEvent.category}} </p>
+            <div class="flex justify-center items-center mt-4">
+                <button class="bg-orange-600 text-white text-xl font-bold text-center px-12 py-2 rounded-xl mx-auto max-md:text-xs"
+                    (click)="viewCard()"> Print Ticket ? </button>
             </div>
-
-            <div class="flex justify-between font-semibold text-gray-600 my-8">
-                <p> Price </p>
-                <p> $ {{fetchedEvent.price}} </p>
-            </div>
-
-            <div class="flex justify-between font-semibold text-gray-600 my-8">
-                <p> Capacity </p>
-                <p> {{fetchedEvent.capacity}} </p>
-            </div>
-        </div>
-
-        <div class="flex justify-center items-center mt-4">
-                <button class="bg-orange-600 w-1/3 rounded-xl text-white text-xl font-bold text-center px-12 py-2" (click)="printTicket()"> Print Ticket ! </button>
         </div>
     </div>
-</div>
 
 </section>

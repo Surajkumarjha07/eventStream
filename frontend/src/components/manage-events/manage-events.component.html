@@ -1,9 +1,9 @@
 <section class="googlefont mt-28">
-    <div class="px-24">
-        <p class="text-4xl font-extrabold text-gray-700"> Events you created </p>
+    <div class="px-24 max-md:px-2">
+        <p class="text-4xl font-extrabold text-gray-700 max-md:text-lg"> Events you created </p>
 
         <div
-            class="flex flex-col justify-start gap-10 h-fit max-h-96 my-16 px-10 py-5 rounded-xl overflow-y-scroll custom-scrollbar">
+            class="flex flex-col justify-start gap-10 h-fit max-h-96 my-16 px-10 py-5 rounded-xl overflow-y-scroll custom-scrollbar max-md:px-1">
             @if (totalEventsCreated.length <= 0) { <img
                 src="https://t3.ftcdn.net/jpg/06/25/40/48/240_F_625404869_Ehy3nD6DoS2Z5SDTxGWUWM3mVSsQ51gr.jpg"
                 alt="Image" class="w-64 h-40 mx-auto">
@@ -11,15 +11,15 @@
                 @else {
                 @for (event of totalEventsCreated; track $index) {
                 <div
-                    class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
+                    class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer max-md:px-1">
                     <img [src]="'http://localhost:8000/uploads/' + event.event_img" alt="eventImg" class="w-20 h-10">
                     <div class="w-full flex justify-between items-center">
                         <div>
-                            <h3 class="text-gray-800 font-semibold text-sm"> {{event.location}} </h3>
-                            <p class="text-gray-800 font-bold"> {{event.title}} </p>
+                            <h3 class="text-gray-800 font-semibold text-sm max-md:hidden"> {{event.location}} </h3>
+                            <p class="text-gray-800 font-bold max-md:text-xs"> {{event.title}} </p>
                         </div>
                         <div class="flex justify-center items-center gap-10">
-                            <p class="text-gray-800 font-medium"> {{event.date}} </p>
+                            <p class="text-gray-800 font-medium max-md:text-xs max-md:hidden"> {{event.date}} </p>
                             <img src="https://cdn-icons-png.freepik.com/256/12319/12319558.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                                 alt="delete" class="w-5 h-5" (click)="deleteCEvent($event)">
                         </div>
@@ -30,11 +30,11 @@
         </div>
     </div>
 
-    <div class="px-24">
-        <p class="text-4xl font-extrabold text-gray-700"> Events you booked </p>
+    <div class="px-24 max-md:px-1">
+        <p class="text-4xl font-extrabold text-gray-700 max-md:text-lg"> Events you booked </p>
 
         <div
-            class="flex flex-col justify-start gap-10 h-fit max-h-96 my-16 px-10 py-5 rounded-xl overflow-y-scroll custom-scrollbar">
+            class="flex flex-col justify-start gap-10 h-fit max-h-96 my-16 px-10 py-5 rounded-xl overflow-y-scroll custom-scrollbar max-md:px-1">
             @if (totalEventsBooked.length <= 0) { <img
                 src="https://t3.ftcdn.net/jpg/06/25/40/48/240_F_625404869_Ehy3nD6DoS2Z5SDTxGWUWM3mVSsQ51gr.jpg"
                 alt="Image" class="w-64 h-40 mx-auto">
@@ -42,15 +42,15 @@
                 @else {
                 @for (event of totalEventsBooked; track $index) {
                 <div
-                    class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer">
+                    class="bg-gray-50 hover:bg-gray-100 w-full h-fit px-4 py-2 rounded-md flex justify-center items-center gap-4 cursor-pointer max-md:px-1">
                     <img [src]="'http://localhost:8000/uploads/' + event.event_img" alt="eventImg" class="w-20 h-10">
                     <div class="w-full flex justify-between items-center">
                         <div>
-                            <h3 class="text-gray-800 font-semibold text-sm"> {{event.email}} </h3>
-                            <p class="text-gray-800 font-bold"> {{event.event_booked}} </p>
+                            <h3 class="text-gray-800 font-semibold text-sm max-md:hidden"> {{event.email}} </h3>
+                            <p class="text-gray-800 font-bold max-md:text-xs"> {{event.event_booked}} </p>
                         </div>
                         <div class="flex justify-center items-center gap-10">
-                            <p class="text-gray-800 font-medium"> {{event.date}} </p>
+                            <p class="text-gray-800 font-medium max-md:hidden"> {{event.date}} </p>
                             <img src="https://cdn-icons-png.freepik.com/256/12319/12319558.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                                 alt="delete" class="w-5 h-5" (click)="deleteBEvent($event)">
                         </div>
