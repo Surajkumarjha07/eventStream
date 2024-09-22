@@ -81,7 +81,7 @@
                 *ngIf="loading; else visibleBlock"></div>
 
             <ng-template #visibleBlock>
-                <div class="flex flex-wrap justify-start max-md:justify-center gap-8">
+                <div [ngClass]="fetchedEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
                     @for (event of fetchedEvents; track $index) {
                     @if ($index < 8) { <app-event-card [description]="event.title" [date]="event.date"
                         [start_time]="event.start_time" [location]="event.location" [price]="event.price"
