@@ -13,7 +13,14 @@ import { EventsService } from '../../services/events/events.service';
 })
 export class TicketsComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: Document, private router: Router, private ticketServices: TicketsService, private eventServices: EventsService) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router, private ticketServices: TicketsService, private eventServices: EventsService) { 
+    if (typeof window !== 'undefined') { 
+      if (window.innerWidth < 1370) {
+        this.smallDevice = true
+      }
+    }
+
+  }
 
   email: string | null = ''
   totalTickets: any = []
@@ -21,28 +28,11 @@ export class TicketsComponent implements OnInit {
   numberofTickets: number = 0
   OpenClicked: boolean = false
   fetchedEvent: any | null = []
+  smallDevice: boolean = false
   interSectionObserver!: IntersectionObserver
 
   @ViewChild('divRef2') divRef2!: ElementRef;
   @ViewChild('divRef') divRef!: ElementRef;
-
-  @HostListener('document:scroll')
-  documentScroll() {
-    this.interSectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.target === this.divRef2.nativeElement && !entry.isIntersecting) {
-          this.divRef2.nativeElement.classList.add('anime')
-        }
-
-        if (entry.target === this.divRef.nativeElement && entry.isIntersecting) {
-          this.divRef2.nativeElement.classList.remove('anime')
-        }
-      });
-    })
-
-    this.interSectionObserver.observe(this.divRef.nativeElement)
-    this.interSectionObserver.observe(this.divRef2.nativeElement)
-  }
 
   ngOnInit(): void {
     let localStorage = this.document.defaultView?.localStorage
@@ -52,7 +42,34 @@ export class TicketsComponent implements OnInit {
       this.email = userEmail
       this.GetTicketsByUser()
     }
+  }
 
+  @HostListener('window:resize')
+  documentResize() {
+    if (window.innerWidth < 1370) {
+      this.smallDevice = true
+      console.log('smalldevice');
+    }
+  }
+
+  @HostListener('document:scroll')
+  documentScroll() {
+    if (!this.smallDevice) {
+      this.interSectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.target === this.divRef2.nativeElement && !entry.isIntersecting) {
+            this.divRef2.nativeElement.classList.add('anime')
+          }
+          
+          if (entry.target === this.divRef.nativeElement && entry.isIntersecting) {
+            this.divRef2.nativeElement.classList.remove('anime')
+          }
+        });
+      })
+      
+      this.interSectionObserver.observe(this.divRef.nativeElement)
+      this.interSectionObserver.observe(this.divRef2.nativeElement)
+    }
   }
 
   CheckTicket() {

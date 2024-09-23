@@ -1,11 +1,11 @@
-<section class="flex justify-center items-center overflow-y-hidden -mt-16">
+<section class="flex justify-center items-center absolute top-0 left-0 right-0 bottom-0">
 
     <aside class="w-1/2 h-screen bg-white flex justify-center">
-        <div class="h-screen ">
-            <p class="googlefont text-orange-600 font-bold text-2xl cursor-pointer" [routerLink]="['/']"> eventStream </p>
+        <div class="h-screen">
+            <p class="googlefont text-orange-600 font-bold text-2xl cursor-pointer max-md:text-lg" [routerLink]="['/']"> eventStream </p>
             
-            <h1 class="googlefont text-6xl text-indigo-950 font-extrabold w-72 my-10"> Log In </h1>
-            <form class="w-96" method="post" [formGroup]="login_form" (submit)="login()">
+            <h1 class="googlefont text-6xl text-indigo-950 font-extrabold w-72 my-10 max-md:text-3xl max-lg:text-4xl"> Log In </h1>
+            <form class="w-96 max-md:w-full max-md:mx-auto max-[780px]:px-4" method="post" [formGroup]="login_form" (submit)="login()">
                 
                 <input type="email" name="email" class="w-full py-3 outline-none border-b focus:border-b-2 focus:border-b-orange-600 focus:placeholder:transition-all focus:placeholder:duration-500 focus:placeholder:ease-in-out focus-within:placeholder:text-xs focus:placeholder:text-orange-600 focus:placeholder:-translate-y-5" placeholder="Email address" formControlName="email">
                 <br><br>
@@ -14,7 +14,7 @@
 
                 <input type="submit" value="Log In" class="bg-orange-600 w-full cursor-pointer text-white py-2 rounded-sm my-10">
 
-                <p class="text-gray-800 font-semibold my-4">
+                <p class="text-gray-800 font-semibold my-4 max-md:text-xs">
                     Don't have an account? <span class="text-blue-600 cursor-pointer" [routerLink]="['/signUp']"> Sign Up </span>
                 </p>
                 
@@ -22,7 +22,7 @@
         </div>
     </aside>
 
-    <aside class="w-1/2 h-screen bg-red-200">
+    <aside class="w-1/2 h-screen bg-red-200 max-md:hidden">
         <img src="https://th.bing.com/th/id/R.e96757b3e5cd0281268cc6e2c934c908?rik=2deYsKIRxtGN9A&riu=http%3a%2f%2flondon-event-photography.co.uk%2fwp-content%2fuploads%2f2015%2f01%2fJohn-About-Me-Event-Photography-101.jpg&ehk=e1%2bQ1TSrLAfbURHGvDpf%2bnwHw05pnIZJFCGXn%2fXh8E0%3d&risl=1&pid=ImgRaw&r=0" alt="SignUp Image" class="h-full w-full">
     </aside>
 

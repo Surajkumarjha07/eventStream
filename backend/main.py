@@ -6,6 +6,7 @@ from routes.payments.payment import router as paymentRouter
 from routes.events.bookTickets import router as tickets
 from routes.events.getTicketByUser import router as getTickets
 from routes.events.likes import router as likeRouter
+from routes.events.searchEvents import router as searchRouter
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
@@ -37,4 +38,5 @@ app.include_router(paymentRouter)
 app.include_router(tickets)
 app.include_router(getTickets)
 app.include_router(likeRouter)
+app.include_router(searchRouter)
 app.mount('/uploads', StaticFiles(directory= Path),name="uploads")

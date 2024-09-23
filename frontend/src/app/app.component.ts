@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
     this.searchActive = e    
   }
 
+  receiveMsg2(e: boolean) {
+    this.searchActive = e    
+  }
+
   constructor(@Inject(DOCUMENT) private document: Document ,private router: Router) {
     const localStorage = document.defaultView?.localStorage;
     

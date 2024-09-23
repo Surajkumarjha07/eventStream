@@ -1,10 +1,11 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, effect, Inject, Input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
+import { Component, effect, HostListener, Inject, Input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PaymentPageComponent } from "../payment-page/payment-page.component";
 import { PaymentsService } from '../../services/payments/payments.service';
 import { EventsService } from '../../services/events/events.service';
+declare var Razorpay: any
 
 @Component({
   selector: 'app-event-form',
@@ -13,7 +14,7 @@ import { EventsService } from '../../services/events/events.service';
   templateUrl: './event-form.component.html',
   styleUrl: './event-form.component.css'
 })
-export class EventFormComponent{
+export class EventFormComponent {
 
   LocDetails: boolean = false
   userEmail = signal<string>('')
@@ -24,6 +25,7 @@ export class EventFormComponent{
   hideLocDetails: boolean = false
   selectedDiv: number = 0
   choosenFile: File | null = null
+  smallDevice = signal<boolean>(false)
   razorpay_signature = signal<string | null>('')
   TypesArray: any | null = [
     { img: 'https://cdn-icons-png.freepik.com/256/402/402326.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid', text: 'Venue' },
@@ -39,7 +41,19 @@ export class EventFormComponent{
     }
     console.log(this.userEmail());
 
-    this.createEvent.get('event_creator')?.setValue(this.userEmail());
+    if (typeof window !== 'undefined') {
+      this.createEvent.get('event_creator')?.setValue(this.userEmail());
+      if (window.innerWidth < 1370) {
+        this.smallDevice.set(true)
+        console.log('amalldem');
+      }
+    }
+
+    this.paymentsService.sendData(19900).subscribe(response => {
+      this.paymentResponse = response
+      console.log(response);
+      console.log('Object: ', this.paymentResponse);
+    })
 
     effect(() => {
       if (this.razorpay_signature()) {
@@ -63,6 +77,42 @@ export class EventFormComponent{
     price: new FormControl<number | null>(null, []),
     capacity: new FormControl<number | null>(null, [Validators.required]),
   })
+
+  @HostListener('window:resize')
+  documentResize() {
+    if (window.innerWidth < 1370) {
+      this.smallDevice.set(true)
+      console.log('amalldem');
+    }
+  }
+
+
+  makePayment = async () => {
+
+    const options = {
+      "key": "rzp_test_RNopBpvUbcKwIf", // Enter the Key ID generated from the Dashboard
+      "amount": `${this.createEvent.controls.price.value}`, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "USD",
+      "name": "eventStream Pvt. Ltd.",
+      "description": "Event Booking Transaction",
+      "image": "https://whattheai.tech/wp-content/uploads/2023/08/Logo_NixerAI.png",
+      "order_id": `${this.paymentResponse?.id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1 - "order_IluGWxBm9U8zJ8"
+      "handler": (response: any) => {
+        console.log(response);
+        this.razorpay_signature.set(response.razorpay_signature)
+        console.log('responsecode', this.razorpay_signature());
+        alert('Payment Successfull!')
+      },
+      "theme": {
+        "color": "#FF5500"
+      }
+    };
+
+    if (this.paymentResponse.id) {
+      const paymentObject = await new Razorpay(options);
+      paymentObject.open()
+    }
+  }
 
   disable() {
     this.isDisabled = !this.isDisabled
@@ -108,18 +158,17 @@ export class EventFormComponent{
 
   getSignature(e: string | null) {
     this.razorpay_signature.set(e)
-    console.log("rc = ",e);
+    console.log("rc = ", e);
   }
 
   doPayment() {
-    this.goForPayment = !this.goForPayment
-    console.log(this.createEvent.controls.price.value);
-
-    this.paymentsService.sendData(19900).subscribe(response => {
-      this.paymentResponse = response
-      console.log(response);
-      console.log('Object: ', this.paymentResponse);
-    })
+    if (this.smallDevice()) {
+      this.makePayment()
+    }
+    else{
+      this.goForPayment = !this.goForPayment
+      console.log(this.createEvent.controls.price.value);
+    }
 
   }
 

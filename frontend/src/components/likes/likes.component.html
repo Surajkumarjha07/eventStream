@@ -1,8 +1,8 @@
 <section class="googlefont h-screen">
-    <div class="flex flex-col justify-center gap-10 w-2/3 h-full mx-auto">
-        <p class="text-5xl font-extrabold"> Likes </p>
+    <div class="flex flex-col justify-center gap-10 w-2/3 h-full mx-auto max-md:w-full max-md:px-5">
+        <p class="text-5xl font-extrabold max-md:text-2xl"> Likes </p>
 
-        <div class="text-center my-20" *ngIf="fetchedLikes.length == 0; else likeBlock">
+        <div class="text-center my-20 max-md:w-full" *ngIf="fetchedLikes.length == 0; else likeBlock">
             <img src="https://cdn-icons-png.freepik.com/256/3795/3795963.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                 alt="empty" class="w-24 h-24 inline-block my-10">
             <p class="text-indigo-950 font-semibold text-2xl my-4"> Add events, share with friends! </p>
@@ -11,15 +11,13 @@
 
         <ng-template #likeBlock>
             <div
-                class="flex flex-col justify-start gap-10 h-fit max-h-96 my-16 px-10 py-5 rounded-xl overflow-y-scroll custom-scrollbar">
+                class="flex flex-col justify-start gap-10 h-fit max-h-96 my-16 px-10 py-5 rounded-xl overflow-y-scroll custom-scrollbar max-md:w-full max-[428px]:px-4">
                 @for (like of fetchedLikes; track $index) {
                 <div
-                    class="open-container bg-gray-100 hover:bg-gray-200 w-2/3 self-end py-5 px-10 rounded-md flex justify-center items-center gap-4 cursor-pointer">
-                    <div class="w-full flex justify-between items-center">
+                    class="open-container bg-gray-100 hover:bg-gray-200 w-2/3 self-end py-5 px-10 rounded-md flex justify-between items-center gap-4 cursor-pointer max-[1100px]:w-11/12 max-md:mx-auto max-md:text-xs max-[428px]:px-4">
                         <p class="text-gray-800 font-medium hover:underline" (click)="eventClicked($event)"> {{like.liked_events}} </p>
                         <img src="https://cdn-icons-png.freepik.com/256/12319/12319558.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
                             alt="delete" class="w-5 h-5" (click)="deleteLike($event)">
-                    </div>
                 </div>
                 }
             </div>
@@ -27,34 +25,35 @@
 
     </div>
 
-    <div
-        class="w-full h-full bg-gray-800 bg-opacity-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0" *ngIf="OpenClicked">
-        <div class="openedBox bg-white shadow-md shadow-gray-100 w-1/2 h-fit py-10 rounded-xl">
-            <p class="ml-10 text-orange-600 font-bold text-2xl"> eventStream </p>
-            <div class="px-20">
-                <div class="flex justify-between font-semibold text-gray-600 my-8">
+    <div class="w-full h-full bg-gray-800 bg-opacity-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0"
+        *ngIf="OpenClicked">
+        <div class="openedBox bg-white shadow-md shadow-gray-100 w-1/2 h-fit py-10 rounded-xl max-md:w-2/3 max-md:mt-16 max-md:py-2">
+            <p class="text-orange-600 font-bold text-2xl max-md:text-sm max-md:mx-auto text-center"> eventStream </p>
+            <div class="px-20 max-md:px-2">
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
                     <p> Your Event </p>
                     <p class="w-64 text-end"> {{fetchedEvent.title}} </p>
                 </div>
 
-                <div class="flex justify-between font-semibold text-gray-600 my-8">
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
                     <p> Category</p>
                     <p> {{fetchedEvent.category}} </p>
                 </div>
 
-                <div class="flex justify-between font-semibold text-gray-600 my-8">
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
                     <p> Price </p>
                     <p> $ {{fetchedEvent.price}} </p>
                 </div>
 
-                <div class="flex justify-between font-semibold text-gray-600 my-8">
+                <div class="flex justify-between gap-8 font-semibold text-gray-600 my-8 max-md:my-4">
                     <p> Capacity </p>
                     <p> {{fetchedEvent.capacity}} </p>
                 </div>
             </div>
 
             <div class="flex justify-center items-center mt-4">
-                    <button class="bg-orange-600 text-white text-xl font-bold text-center px-12 py-2 rounded-xl mx-auto" (click)="viewCard()"> Want to book? </button>
+                <button class="bg-orange-600 text-white text-xl font-bold text-center px-12 py-2 rounded-xl mx-auto max-md:text-xs"
+                    (click)="viewCard()"> Want to book ? ? </button>
             </div>
         </div>
     </div>

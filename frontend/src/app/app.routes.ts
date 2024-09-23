@@ -12,6 +12,7 @@ import { SpecificEventComponent } from '../components/specific-event/specific-ev
 import { ManageEventsComponent } from '../components/manage-events/manage-events.component';
 import { AccountSettingsComponent } from '../components/account-settings/account-settings.component';
 import { LikesComponent } from '../components/likes/likes.component';
+import { SearchedEventsComponent } from '../components/searched-events/searched-events.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -26,6 +27,7 @@ export const routes: Routes = [
     {path: 'manageEvents', component: ManageEventsComponent},
     {path: 'accountSettings', component: AccountSettingsComponent},
     {path: 'likes', component: LikesComponent},
+    {path: 'searchedEvents', component: SearchedEventsComponent},
     {path: '', component: HomeComponent},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

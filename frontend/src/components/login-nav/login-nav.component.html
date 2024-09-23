@@ -1,68 +1,98 @@
-<nav class="googlefont border-b border-2 fixed w-full top-0 left-0 z-50 bg-white">
-    <ul class="flex justify-around items-center">
-        <li class="cursor-pointer text-orange-600 font-bold text-2xl" [routerLink]="['/']"> eventStream </li>
-        <li class="relative" >
+<nav class="googlefont border-b border-2 w-screen fixed top-0 left-0 z-50 bg-white py-1">
+    <ul
+    class="flex justify-center flex-wrap gap-10 items-center max-[428px]:justify-center max-[1200px]:gap-4">
+        <li class="cursor-pointer text-orange-600 font-bold text-2xl max-[428px]:text-sm max-[428px]:w-1/3"
+            [routerLink]="['/']">
+            eventStream </li>
+        <li class="relative w-2/5 max-[778px]:w-[180px] max-[900px]:w-[250px]">
             <input type="search" name="search" id="search"
-                class="search-container w-[40rem] h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full max-md:w-20" autocomplete="off"
-                placeholder="Search events" (input)="search($event)" (click)="toggleSuggestion()">
+            class="search-container w-full h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full max-[778px]:h-8"
+            autocomplete="off" placeholder="Search events" (input)="search($event)" (click)="toggleSuggestion()">
 
-            <div class="w-1/2 absolute top-12 left-0 bg-white py-4 px-10 rounded-md" *ngIf="searchClicked">
-                <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold">
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg" alt="" class="w-5 h-5"> <a routerLink="/manageEvents"> hackathons </a> </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg" alt="" class="w-5 h-5"> max amini </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5" > <img src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg" alt="" class="w-5 h-5"> yoga </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5" > <img src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg" alt="" class="w-5 h-5"> pool parties </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5" > <img src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg" alt="" class="w-5 h-5"> job fairs </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5" > <img src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg" alt="" class="w-5 h-5"> sports </li>
-                </ul>
-            </div>
+        <div class="w-full h-96 overflow-y-scroll absolute top-12 left-0 bg-white py-4 px-10 rounded-md z-40 max-[1035px]:w-full max-md:px-2"
+            *ngIf="searchClicked">
+            @if (TotalSearches.length>0) {
+            @for (searchItem of TotalSearches; track $index) {
+            <ul class="flex flex-col justify-center text-gray-500 font-semibold max-lg:text-sm">
+                <li class="cursor-pointer flex justify-start items-center gap-5 my-2" (click)="gotoEventInfo($event)"> <img
+                        src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                        alt="" class="w-5 h-5"> {{searchItem.title }}
+                </li>
+            </ul>
+            } }
+            @else {
+            <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold z-20 max-md:text-xs">
+                <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                    src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                    alt="" class="w-5 h-5"> Music Event </li>
+                <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                        src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                        alt="" class="w-5 h-5"> Corporate Event </li>
+                <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                        src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                        alt="" class="w-5 h-5"> Online Event </li>
+                <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                        src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                        alt="" class="w-5 h-5"> Retail Event </li>
+                <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                        src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                        alt="" class="w-5 h-5"> Non-Profit Event </li>
+                <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                        src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                        alt="" class="w-5 h-5"> Festivals & Fairs Event </li>
+            </ul>
+            }
+        </div>
         </li>
 
-        <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2"
-            [routerLink]="['/createEvents']">
-            <div>
-                <img src="https://t3.ftcdn.net/jpg/07/23/62/12/240_F_723621285_P7ze76qTA2R19MhKBAt1QeeJrcWdT1tV.jpg"
-                    alt="add" class="w-5 h-5 mx-auto">
-                <p> Create an event </p>
-            </div>
-        </li>
-
-        <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2"
-            [routerLink]="['/likes']">
-            <div>
-                <img src="https://cdn-icons-png.freepik.com/256/11488/11488565.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
-                    alt="add" class="w-5 h-5 mx-auto">
-                <p> Likes </p>
-            </div>
-        </li>
-
-        <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2"
-            [routerLink]="['/tickets']">
-            <div>
-                <img src="https://t3.ftcdn.net/jpg/01/09/45/80/240_F_109458037_1Z1WHVQTOxarR5qTBDgaqB8aXwryF7h7.jpg"
-                    alt="add" class="w-5 h-5 mx-auto">
-                <p> Tickets </p>
-            </div>
-        </li>
-
-        <li class="relative group">
-            <div class="flex justify-center items-center gap-4 hover:bg-gray-100 px-5 py-1">
-                <div class="rounded-full bg-gray-100 px-4 py-4">
-                    <img src="https://cdn-icons-png.freepik.com/256/15049/15049767.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
-                        alt="profile" class="w-4 h-4">
+        <ul class="flex justify-start gap-10 max-[1200px]:gap-0 max-[1200px]:mx-auto">
+            <li class="cursor-pointer text-sm text-center font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2 max-[428px]:text-xs"
+                [routerLink]="['/createEvents']">
+                <div>
+                    <img src="https://t3.ftcdn.net/jpg/07/23/62/12/240_F_723621285_P7ze76qTA2R19MhKBAt1QeeJrcWdT1tV.jpg"
+                        alt="add" class="w-5 h-5 mx-auto max-[428px]:w-3 max-[428px]:h-3">
+                    <p> Create an event </p>
                 </div>
-                <p class="font-bold text-gray-500 text-sm"> {{email | lowercase}} </p>
-            </div>
+            </li>
 
-            <div class="group-hover:block absolute top-14 right-0 bg-white py-4 px-10 rounded-md hidden">
-                <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold">
-                    <li class="cursor-pointer"> <a routerLink="/manageEvents"> Manage my events </a> </li>
-                    <li class="cursor-default"> Tickets ({{numberofTickets}}) </li>
-                    <li class="cursor-pointer" routerLink="/accountSettings"> Account setting </li>
-                    <li class="cursor-pointer" (click)="logOut()"> Log out </li>
-                </ul>
-            </div>
-        </li>
+            <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2 max-[428px]:text-xs"
+                [routerLink]="['/likes']">
+                <div>
+                    <img src="https://cdn-icons-png.freepik.com/256/11488/11488565.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="add" class="w-5 h-5 mx-auto max-[428px]:w-3 max-[428px]:h-3">
+                    <p> Likes </p>
+                </div>
+            </li>
+
+            <li class="cursor-pointer text-sm font-medium text-gray-500 hover:text-blue-500 rounded-full px-4 py-2 max-[428px]:text-xs"
+                [routerLink]="['/tickets']">
+                <div>
+                    <img src="https://t3.ftcdn.net/jpg/01/09/45/80/240_F_109458037_1Z1WHVQTOxarR5qTBDgaqB8aXwryF7h7.jpg"
+                        alt="add" class="w-5 h-5 mx-auto max-[428px]:w-3 max-[428px]:h-3">
+                    <p> Tickets </p>
+                </div>
+            </li>
+
+            <li class="relative group max-[428px]:text-xs">
+                <div class="flex justify-center items-center gap-4 hover:bg-gray-100 px-5 py-1">
+                    <div class="rounded-full bg-gray-100 px-4 py-4 max-[337px]:px-2 max-[337px]:py-2">
+                        <img src="https://cdn-icons-png.freepik.com/256/15049/15049767.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                            alt="profile" class="w-4 h-4 max-[428px]:w-3 max-[428px]:h-3">
+                    </div>
+                    <p class="font-bold text-gray-500 text-sm max-[1375px]:hidden"> {{email | lowercase}} </p>
+                </div>
+
+                <div
+                    class="group-hover:block absolute w-full top-14 right-0 bg-white py-4 px-10 max-[1384px]:w-60 max-lg:text-sm rounded-md hidden">
+                    <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold">
+                        <li class="cursor-pointer"> <a routerLink="/manageEvents"> Manage my events </a> </li>
+                        <li class="cursor-default"> Tickets ({{numberofTickets}}) </li>
+                        <li class="cursor-pointer" routerLink="/accountSettings"> Account setting </li>
+                        <li class="cursor-pointer" (click)="logOut()"> Log out </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
 
     </ul>
 </nav>

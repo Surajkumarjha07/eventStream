@@ -36,4 +36,8 @@ export class EventsService {
     return this.http.get(`http://127.0.0.1:8000/events/geteventBytitle?title=${title}`)
   }
 
+  searchEvents(word: string | null) {
+    return this.http.get(`http://localhost:8000/events/searchEvent?word=${word}`)
+  }
+
 }

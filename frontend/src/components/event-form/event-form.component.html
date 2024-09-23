@@ -7,14 +7,14 @@
             eventStream </p>
     </div>
 
-    <div class="w-1/3 mx-auto mt-20 text-start">
-        <h1 class="text-4xl font-bold text-gray-800"> Create an event with us </h1>
+    <div class="w-2/5 mx-auto mt-20 text-start max-md:w-4/5">
+        <h1 class="text-4xl font-bold text-gray-800 max-[950px]:text-2xl"> Create an event with us </h1>
 
         <form class="my-8 text-gray-800" [formGroup]="createEvent" (submit)="doPayment()">
 
             <!-- Event Title -->
             <div>
-                <h3 class="text-lg font-medium "> What&apos;s the name of your event? </h3>
+                <h3 class="text-lg font-medium max-md:text-lg"> What&apos;s the name of your event? </h3>
                 <p class="text-xs font-medium my-3"> This will be your event’s title. Your title will be used to
                     help
                     create
@@ -24,12 +24,13 @@
                 <input type="text" name="title"
                     class="border-2 border-gray-400 w-full focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg placeholder:text-sm placeholder:text-gray-700"
                     placeholder="Event Title" formControlName="title">
+                    <p *ngIf="createEvent.get('title')?.touched && createEvent.get('title')?.invalid" class="text-red-800 font-medium"> Please enter a valid title </p>
             </div>
 
             <!-- Event Category -->
             <div>
 
-                <h3 class="text-lg font-medium mt-12"> Choose category of your event? </h3>
+                <h3 class="text-lg font-medium mt-12 max-md:text-lg"> Choose category of your event? </h3>
                 <p class="text-xs font-medium my-3"> This will be your event’s category. Your event category will be
                     used to help
                     users to search for your events! </p>
@@ -48,37 +49,50 @@
                         <option value="Festivals and Fairs Event"> Festivals & Fairs Event </option>
                     </select>
                 </div>
-
+                <p *ngIf="createEvent.get('category')?.touched && createEvent.get('category')?.invalid" class="text-red-800 font-medium"> Please select a category </p>
             </div>
 
             <!-- Event date and time -->
             <div>
-                <h3 class="text-lg font-medium mt-12 mb-5"> When does your event start and end? </h3>
+                <h3 class="text-lg font-medium mt-12 mb-5 max-md:text-lg"> When does your event start and end? </h3>
 
-                <div class="flex justify-center items-center gap-5">
-                    <input type="date" name="date"
-                        class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 w-64 py-3 rounded-lg"
-                        formControlName="date">
+                <div>
+                    <div class="w-full">
+                        <label for="date" class="text-gray-700 font-bold text-sm"> Event Date </label> <br>
+                        <input type="date" name="date"
+                            class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg w-full"
+                            formControlName="date">
+                    </div>
 
-                    <input type="time" name="startTime"
-                        class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg"
-                        formControlName="start_time">
+                    <div class="flex justify-center items-center gap-4 my-6">
+                        <div class="w-full">
+                            <label for="start_time" class="text-gray-700 font-bold text-sm"> Event start time </label>
+                            <br>
+                            <input type="time" name="startTime"
+                                class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg w-full"
+                                formControlName="start_time">
+                        </div>
 
-                    <input type="time" name="endTime"
-                        class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg"
-                        formControlName="end_time">
+                        <div class="w-full">
+                            <label for="start_date" class="text-gray-700 font-bold text-sm"> Event end time </label>
+                            <br>
+                            <input type="time" name="endTime"
+                                class="border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg w-full"
+                                formControlName="end_time">
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Location -->
             <div class="h-auto">
-                <h2 class="text-lg font-medium mt-12 mb-5"> Where is it located?</h2>
+                <h2 class="text-lg font-medium mt-12 mb-5 max-md:text-lg"> Where is it located?</h2>
 
                 <div class="flex justify-start items-center gap-5">
                     @for (types of TypesArray; track $index) {
                     <div [ngClass]="selectedDiv === $index? 'flex justify-center items-center gap-2 px-3 py-3 text-white bg-blue-500 w-fit h-auto rounded-full cursor-pointer' : 'flex justify-center items-center gap-2 px-3 py-3 bg-gray-200 w-fit h-auto rounded-full cursor-pointer'"
                         (click)="getLocType($event,$index)">
-                        <img [src]="types.img" alt="location" class="w-5 h-5 pointer-events-none">
+                        <img [src]="types.img" alt="location" class="w-5 h-5 pointer-events-none max-md:w-3 max-md:h-3">
                         <p class="text-xs font-semibold pointer-events-none"> {{types.text}} </p>
                     </div>
                     }
@@ -124,7 +138,7 @@
 
             <!-- Ticket Price -->
             <div>
-                <h2 class="text-lg font-medium mt-8"> How much do you want to charge for tickets? </h2>
+                <h2 class="text-lg font-medium mt-8 max-md:text-lg"> How much do you want to charge for tickets? </h2>
                 <p class="text-xs font-medium my-1"> Our tool can only generate one General Admission ticket for
                     now.
                     You can edit and add more ticket types later. </p>
@@ -145,7 +159,7 @@
 
             <!-- Event Capacity -->
             <div>
-                <h2 class="text-lg font-medium mt-8"> What's the capacity for your event? </h2>
+                <h2 class="text-lg font-medium mt-8 max-md:text-lg"> What's the capacity for your event? </h2>
                 <p class="text-xs font-medium my-1"> Event capacity is the total number of tickets you're willing to
                     sell. </p>
 
@@ -154,10 +168,14 @@
                     placeholder="0" formControlName="capacity">
             </div>
 
-            <div class="w-full h-fit relative border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-2 rounded-lg">
-                <div class="w-ful bg-white text-gray-800 font-bold text-lg pointer-events-none cursor-pointer"> {{!choosenFile? 'Choose an Image': 'choosen File - ' + choosenFile.name}} </div>
-                <input type="file" name="imageFile" class="w-full absolute inset-0 opacity-0 cursor-pointer" (change)="getFile($event)">
-            </div>
+            <div
+                class="w-full h-fit relative border-2 border-gray-400 focus:border-gray-800 hover:border-gray-800 px-4 py-2 rounded-lg">
+                <div class="w-ful bg-white text-gray-800 font-bold text-lg pointer-events-none cursor-pointer">
+                    {{!choosenFile? 'Choose an Image': 'choosen File - ' + choosenFile.name}} </div>
+                <input type="file" name="imageFile" class="w-full absolute inset-0 opacity-0 cursor-pointer"
+                    (change)="getFile($event)">
+                </div>
+                <p *ngIf="!choosenFile" class="text-red-800 font-medium"> Please select a image for your event </p>
 
             <input type="submit" value="Create Event"
                 class="bg-orange-600 w-44 rounded-lg cursor-pointer text-white py-2 my-10">
@@ -170,4 +188,5 @@
 </section>
 
 <app-payment-page [goForPayment]="goForPayment" [price]="createEvent.controls.price.value"
-    [event_creator]="createEvent.controls.event_creator.value" [paymentResponse]="paymentResponse" (razorpay_signature)="getSignature($event)"></app-payment-page>
+    [event_creator]="createEvent.controls.event_creator.value" [paymentResponse]="paymentResponse"
+    (razorpay_signature)="getSignature($event)"></app-payment-page>

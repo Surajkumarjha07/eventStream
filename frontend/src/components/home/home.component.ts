@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent implements OnInit {
 
   fetchedEvents: any | null = []
+  DelhiEvents: any | null = []
   loading: boolean = true
 
   private eventServices = inject(EventsService)
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.eventServices.getallEvents().subscribe(response => {
       this.fetchedEvents = response
+      this.DelhiEvents = Array.from(this.fetchedEvents.filter((event: any) => event.location === 'Delhi'))
       this.loading = false
     })
   }
