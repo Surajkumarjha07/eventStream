@@ -33,51 +33,99 @@
             <div class="w-5/6 mx-auto">
                 <h1 class="text-2xl text-gray-600 font-bold mb-10"> Popular in Delhi </h1>
 
-                <div [ngClass]="DelhiEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
+                @if (DelhiEvents.length > 0) {
+                <div
+                    [ngClass]="DelhiEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
                     @for (event of DelhiEvents; track $index) {
-                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                    @if ($index < 8) { <app-event-card [description]="event.title" [event_creator]="event.event_creator"
                         [date]="event.date ? event.date : 'To be announced'"
                         [start_time]="event.start_time ? event.start_time : '(time not confirmed yet)'"
-                        [location]="event.location" [price]="event.price"
-                        [event_img]="event.event_img"></app-event-card>
-                    }
+                        [location]="event.location" [price]="event.price" [event_img]="event.event_img">
+                        </app-event-card>
+                        }
+                        }
                 </div>
+                }
+                @else {
+                <div class="mx-auto mt-10 mb-20 w-full">
+                    <img src="https://cdn-icons-png.freepik.com/256/9122/9122832.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="ticket" class="w-36 h-36 mx-auto max-md:w-24 max-md:h-24">
+                    <p class="text-indigo-950 text-2xl font-bold my-8 text-center max-md:text-sm"> No available Events
+                    </p>
+                </div>
+                }
             </div>
 
             <div class="w-5/6 mx-auto mt-16">
                 <h1 class="text-2xl text-gray-600 font-bold mb-10"> Online Events </h1>
 
-                <div [ngClass]="OnlineEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
-                    @for (event of FestivalEvents; track $index) {
-                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                @if (OnlineEvents.length > 0) {
+                <div
+                    [ngClass]="OnlineEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
+                    @for (event of OnlineEvents; track $index) {
+                    @if ($index < 8) { <app-event-card [description]="event.title" [event_creator]="event.event_creator"
                         [date]="event.date" [start_time]="event.start_time" [location]="event.location"
                         [price]="event.price" [event_img]="event.event_img"></app-event-card>
-                    }
+                        }
+                        }
                 </div>
+                }
+                @else {
+                <div class="mx-auto mt-10 mb-20 w-full">
+                    <img src="https://cdn-icons-png.freepik.com/256/9122/9122832.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="ticket" class="w-36 h-36 mx-auto max-md:w-24 max-md:h-24">
+                    <p class="text-indigo-950 text-2xl font-bold my-8 text-center max-md:text-sm"> No available Events
+                    </p>
+                </div>
+                }
             </div>
 
             <div class="w-5/6 mx-auto mt-16">
                 <h1 class="text-2xl text-gray-600 font-bold mb-10"> Festivals and Fairs Events </h1>
 
-                <div [ngClass]="FestivalEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
+                @if (FestivalEvents.length > 0) {
+                <div
+                    [ngClass]="FestivalEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
                     @for (event of FestivalEvents; track $index) {
-                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                    @if ($index < 8) { <app-event-card [description]="event.title" [event_creator]="event.event_creator"
                         [date]="event.date" [start_time]="event.start_time" [location]="event.location"
                         [price]="event.price" [event_img]="event.event_img"></app-event-card>
-                    }
+                        }
+                        }
                 </div>
+                }
+                @else {
+                <div class="mx-auto mt-10 mb-20 w-full">
+                    <img src="https://cdn-icons-png.freepik.com/256/9122/9122832.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="ticket" class="w-36 h-36 mx-auto max-md:w-24 max-md:h-24">
+                    <p class="text-indigo-950 text-2xl font-bold my-8 text-center max-md:text-sm"> No available Events
+                    </p>
+                </div>
+                }
             </div>
 
             <div class="w-5/6 mx-auto mt-16">
                 <h1 class="text-2xl text-gray-600 font-bold mb-10"> Classes and workshops Events </h1>
 
-                <div [ngClass]="ClassesEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
-                @for (event of ClassesEvents; track $index) {
-                    <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                @if (ClassesEvents.length > 0) {
+                <div
+                    [ngClass]="ClassesEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
+                    @for (event of ClassesEvents; track $index) {
+                    @if ($index < 8) { <app-event-card [description]="event.title" [event_creator]="event.event_creator"
                         [date]="event.date" [start_time]="event.start_time" [location]="event.location"
                         [price]="event.price" [event_img]="event.event_img"></app-event-card>
-                    }
+                        }
+                        }
                 </div>
+                }
+                @else {
+                <div class="mx-auto mt-10 mb-20 w-full">
+                    <img src="https://cdn-icons-png.freepik.com/256/9122/9122832.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                        alt="ticket" class="w-36 h-36 mx-auto max-md:w-24 max-md:h-24">
+                    <p class="text-indigo-950 text-2xl font-bold my-8 text-center max-md:text-sm"> No available Events
+                    </p>
+                </div>
+                }
             </div>
 
         </section>

@@ -7,28 +7,39 @@
                 class="search-container w-full h-12 px-5 bg-gray-50 border border-gray-300 outline-none rounded-full max-[778px]:h-8"
                 autocomplete="off" placeholder="Search events" (input)="search($event)" (click)="toggleSuggestion()">
 
-            <div class="w-1/2 absolute top-12 left-0 bg-white py-4 px-10 rounded-md z-40 max-[1035px]:w-full"
+            <div class="w-1/2 h-96 overflow-y-scroll absolute top-12 left-0 bg-white py-4 px-10 rounded-md z-40 max-[1035px]:w-full"
                 *ngIf="searchClicked">
-                <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold max-lg:text-sm">
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img
+                @if (TotalSearches.length>0) {
+                @for (searchItem of TotalSearches; track $index) {
+                <ul class="flex flex-col justify-center text-gray-500 font-semibold max-lg:text-sm">
+                    <li class="cursor-pointer flex justify-start items-center gap-5 my-2" (click)="gotoEventInfo($event)"> <img
                             src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
-                            alt="" class="w-5 h-5"> <a routerLink="/manageEvents"> hackathons </a> </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img
-                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
-                            alt="" class="w-5 h-5"> max amini </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img
-                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
-                            alt="" class="w-5 h-5"> yoga </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img
-                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
-                            alt="" class="w-5 h-5"> pool parties </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img
-                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
-                            alt="" class="w-5 h-5"> job fairs </li>
-                    <li class="cursor-pointer flex justify-start items-center gap-5"> <img
-                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
-                            alt="" class="w-5 h-5"> sports </li>
+                            alt="" class="w-5 h-5"> {{searchItem.title }}
+                    </li>
                 </ul>
+                } }
+                @else {
+                <ul class="flex flex-col justify-center gap-8 text-gray-500 font-semibold max-lg:text-sm z-20">
+                    <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                        src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                        alt="" class="w-5 h-5"> Music Event </li>
+                    <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                            alt="" class="w-5 h-5"> Corporate Event </li>
+                    <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                            alt="" class="w-5 h-5"> Online Event </li>
+                    <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                            alt="" class="w-5 h-5"> Retail Event </li>
+                    <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                            alt="" class="w-5 h-5"> Non-Profit Event </li>
+                    <li class="cursor-pointer flex justify-start items-center gap-5" (click)="gotoSearch($event)"> <img
+                            src="https://t3.ftcdn.net/jpg/02/81/14/10/240_F_281141027_p3QurYdJnzbnf3Aola5uu0X6ElC5zVpf.jpg"
+                            alt="" class="w-5 h-5"> Festivals & Fairs Event </li>
+                </ul>
+                }
             </div>
         </li>
 

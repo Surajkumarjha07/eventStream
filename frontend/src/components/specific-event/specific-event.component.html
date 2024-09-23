@@ -1,28 +1,47 @@
-<section class="googlefont">
+<section class="googlefont max-md:mt-4">
     <div class="w-11/12 h-fit overflow-hidden mx-auto relative z-10">
-        <img [src]="currentImg" alt="EventImg" class="w-full h-[34.5rem] rounded-md">
+        <img [src]="currentImg" alt="EventImg"
+            class="w-full h-[34.5rem] rounded-md max-md:w-full max-md:h-40 max-[1100px]:h-[20rem] max-[1100px]:mt-8">
         <div
-            class="absolute inset-0 rounded-md flex flex-col justify-center {{currentTextCol}} text-4xl font-extrabold px-24 bg-gradient-to-t from-white/30 to-white/0">
+            class="absolute inset-0 rounded-md flex flex-col justify-center {{currentTextCol}} text-4xl font-extrabold px-24 bg-gradient-to-t from-white/30 to-white/0 max-md:hidden max-[1100px]:text-2xl">
             <h1> {{category?.replace('and', '&')}} </h1>
             <p class="w-96 mt-8 font-extrabold text-lg"> {{currentSlo}} </p>
         </div>
     </div>
 
-    <div class="flex flex-col justify-end items-center gap-20 py-11 {{currentDivCol}} w-screen h-[30rem] absolute top-80">
-        <h1 class="{{currentTextCol}} font-extrabold text-5xl z-20 animate-pulse text-center w-10/12"> {{currentPar}} </h1>
+    <div
+        class="flex flex-col justify-end items-center gap-20 py-11 {{currentDivCol}} w-screen h-[30rem] absolute top-80 max-md:top-60 max-md:h-40 max-md:gap-9 max-[1100px]:h-[14rem] max-[1100px]:gap-7">
+        <h1
+            class="{{currentTextCol}} font-extrabold text-5xl z-20 animate-pulse text-center w-10/12 max-md:text-xl max-[1100px]:text-3xl">
+            {{currentPar}} </h1>
         <a routerLink="/eventForm">
-            <button class="bg-orange-600 text-white font-bold px-10 py-2 rounded-md"> Create your event </button>
+            <button class="bg-orange-600 text-white font-bold px-10 py-2 rounded-md max-md:text-sm"> Create your event
+            </button>
         </a>
     </div>
 
-    <div class="relative w-5/6 mx-auto mt-64 mb-20">
-        <h1 class="text-4xl font-extrabold text-indigo-950 text-center my-10 underline"> {{fetchedEvents.length !== 0 ? 'Here are some top picks from us.': 'Sorry! at the moment we have no events of this category.'}} </h1>
-        <div class="flex justify-start gap-8">
+    <div class="relative w-5/6 mx-auto mt-64 mb-20 max-md:mt-32">
+        <h1 class="text-4xl font-extrabold text-indigo-950 text-center my-10 underline max-md:text-xl">
+            {{fetchedEvents.length !== 0 ? 'Here are some top picks from us.': 'Sorry! at the moment we have no events of this category.'}} </h1>
+        @if (fetchedEvents.length > 0) {
+
+        <div
+            [ngClass]="fetchedEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
             @for (event of fetchedEvents; track $index) {
-            <app-event-card [description]="event.title" [event_creator]="event.event_creator" [date]="event.date"
-                [start_time]="event.start_time" [location]="event.location" [price]="event.price"></app-event-card>
-            }
+            @if ($index < 8) { <app-event-card [description]="event.title" [event_creator]="event.event_creator"
+                [date]="event.date" [start_time]="event.start_time" [location]="event.location" [price]="event.price"
+                [event_img]="event.event_img"></app-event-card>
+                }
+                }
         </div>
+        }
+        @else {
+        <div class="mx-auto mt-20 mb-20 w-full max-md:mt-10">
+            <img src="https://cdn-icons-png.freepik.com/256/9122/9122832.png?uid=R156296459&ga=GA1.1.823769688.1686565282&semt=ais_hybrid"
+                alt="ticket" class="w-36 h-36 mx-auto max-md:w-24 max-md:h-24">
+            <p class="text-indigo-950 text-2xl font-bold my-8 text-center max-md:text-sm"> No available Events </p>
+        </div>
+        }
     </div>
 
 </section>

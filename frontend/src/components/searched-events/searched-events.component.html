@@ -1,32 +1,19 @@
-<section class="googlefont relative bg-gray-50 w-full overflow-x-hidden">
-    <div class="relative w-full h-fit overflow-hidden">
-        <img src="https://cdn.evbstatic.com/s3-build/fe/build/images/5fe808e647422b815b98b73c28ecf405-3_tablet_1067x470.webp"
-            alt="Image" class="w-full block max-[428px]:mt-11">
-
-        <div class="absolute w-fit inset-0 px-24 py-16 flex flex-col justify-end max-md:px-5 max-md:py-3">
-            <a [routerLink]="['/findEvents']">
-                <button
-                    class="text-white text-sm text-center font-semibold bg-orange-700 px-3 py-3 max-md:text-xs max-md:px-1 max-md:py-1">
-                    Find your next event
-                </button>
-            </a>
-        </div>
-
-    </div>
+<section class="w-full h-screen">
+    <h1 class="text-4xl font-extrabold text-indigo-950 text-center my-10 underline max-md:text-xl max-md:mt-14 max-md:mb-7">
+        {{fetchedEvents.length > 0 ? 'Your Searched Events!' : 'Sorry for now!'}}
+    </h1>
 
     <div class="w-5/6 mx-auto mt-16">
-        <h1 class="text-2xl text-gray-800 font-bold my-10"> Top trending in Delhi </h1>
-
         <div class="w-full h-[28rem] bg-gradient-to-b from-gray-300 to-white/30 mb-10 rounded-xl animate-pulse"
             *ngIf="loading; else visibleBlock"></div>
 
         <ng-template #visibleBlock>
-            @if (DelhiEvents.length > 0) {
+            @if (fetchedEvents.length > 0) {
 
             <div
-                [ngClass]="DelhiEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
+                [ngClass]="fetchedEvents.length >= 3 ? 'flex flex-wrap justify-between gap-8 max-[537px]:justify-center' : 'flex flex-wrap justify-start gap-8 max-[537px]:justify-center'">
 
-                @for (event of DelhiEvents; track $index) {
+                @for (event of fetchedEvents; track $index) {
                     @if ($index < 8) {
                         <app-event-card [description]="event.title" [event_creator]="event.event_creator"
                         [date]="event.date? event.date : 'To be announced'"

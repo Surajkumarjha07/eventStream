@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { EventCardComponent } from '../event-card/event-card.component';
 import { EventsService } from '../../services/events/events.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-specific-event',
   standalone: true,
-  imports: [EventCardComponent, RouterModule],
+  imports: [EventCardComponent, RouterModule, CommonModule],
   templateUrl: './specific-event.component.html',
   styleUrl: './specific-event.component.css'
 })

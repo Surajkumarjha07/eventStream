@@ -24,6 +24,7 @@
                 <input type="text" name="title"
                     class="border-2 border-gray-400 w-full focus:border-gray-800 hover:border-gray-800 px-4 py-3 rounded-lg placeholder:text-sm placeholder:text-gray-700"
                     placeholder="Event Title" formControlName="title">
+                    <p *ngIf="createEvent.get('title')?.touched && createEvent.get('title')?.invalid" class="text-red-800 font-medium"> Please enter a valid title </p>
             </div>
 
             <!-- Event Category -->
@@ -48,7 +49,7 @@
                         <option value="Festivals and Fairs Event"> Festivals & Fairs Event </option>
                     </select>
                 </div>
-
+                <p *ngIf="createEvent.get('category')?.touched && createEvent.get('category')?.invalid" class="text-red-800 font-medium"> Please select a category </p>
             </div>
 
             <!-- Event date and time -->
@@ -173,7 +174,8 @@
                     {{!choosenFile? 'Choose an Image': 'choosen File - ' + choosenFile.name}} </div>
                 <input type="file" name="imageFile" class="w-full absolute inset-0 opacity-0 cursor-pointer"
                     (change)="getFile($event)">
-            </div>
+                </div>
+                <p *ngIf="!choosenFile" class="text-red-800 font-medium"> Please select a image for your event </p>
 
             <input type="submit" value="Create Event"
                 class="bg-orange-600 w-44 rounded-lg cursor-pointer text-white py-2 my-10">

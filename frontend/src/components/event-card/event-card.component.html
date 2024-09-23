@@ -2,9 +2,13 @@
         <img [src]="'http://localhost:8000/uploads/' + event_img" alt="event">
         
         <div class="px-4 py-4">
-            <h1 class="text-gray-700 font-bold text-lg max-md:text-sm"> {{description}} </h1>
-            <p class="text-gray-700 text-sm font-semibold my-1 max-md:text-xs"> {{date}} • {{start_time}} </p>
-            <p class="text-gray-500 text-sm font-medium my-2 max-md:text-xs"> {{location}} </p>
+            <h1 [ngClass]="description !== ''? 'text-gray-700 font-bold text-lg max-md:text-sm' : 'hidden'"> {{description}} </h1>
+            <div class="flex justify-start gap-2">
+                <p [ngClass]="date ? 'text-gray-700 text-sm font-semibold my-1 max-md:text-xs' : 'hidden'"> {{date}}</p>
+                <p [ngClass]="(date && start_time) ? 'text-gray-700 text-sm font-semibold my-1 max-md:text-xs' : 'hidden'"> • </p>
+                <p [ngClass]="start_time ? 'text-gray-700 text-sm font-semibold my-1 max-md:text-xs' : 'hidden'"> {{start_time}} </p>
+            </div>
+            <p [ngClass]="location !== ''? 'text-gray-500 text-sm font-medium my-2 max-md:text-xs' : 'hidden'"> {{location}} </p>
             <p class="text-gray-600 text-sm font-semibold max-md:text-xs"> $ {{price}} </p>
         </div>
         

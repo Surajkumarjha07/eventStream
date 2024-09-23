@@ -39,7 +39,7 @@ async def create_event(
 ):
         ImageFile = await event_img.read()
         print(ImageFile)
-        FileName = title + event_img.filename
+        FileName = title.replace(" ", "") + event_img.filename
         print(FileName)
 
         ImagePath = os.path.join(userImages,FileName)

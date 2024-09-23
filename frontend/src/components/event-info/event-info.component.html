@@ -8,7 +8,7 @@
         <section class="w-5/6 mx-auto">
             <div class="relative mx-auto my-10 max-md:mx-auto h-[28rem] max-[428px]:h-[10rem] max-[428px]:mt-16 max-lg:mt-20 max-lg:h-[18rem] rounded-2xl overflow-hidden">
                 <div class="w-full h-full bg-gray-500 bg-opacity-50 backdrop-blur-xl z-20 absolute inset-0"> </div>
-                <img [src]="'http://localhost:8000/uploads/' + event_img" alt="EventImg"
+                <img [src]="(event_img?.endsWith('.jpeg') || event_img?.endsWith('.jpg') || event_img?.endsWith('png')) ? 'http://localhost:8000/uploads/' + event_img : ''" alt="EventImg"
                 class="rounded-xl w-full h-full absolute inset-0 z-10">
                 <img [src]="'http://localhost:8000/uploads/' + event_img" alt="EventImg"
                 class="rounded-xl w-3/4 h-full mx-auto absolute inset-0 z-30">
